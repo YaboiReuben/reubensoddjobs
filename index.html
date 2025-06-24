@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reuben's Odd Jobs</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light gray background */
+        }
+        /* Custom scroll-to-section smooth behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Style for scroll-to-top button */
+        #scrollToTopBtn {
+            display: none; /* Hidden by default */
+            position: fixed; /* Fixed position */
+            bottom: 20px; /* Place at the bottom */
+            right: 20px; /* Place at the right */
+            z-index: 99; /* Ensure it's above other content */
+            border: none; /* Remove borders */
+            outline: none; /* Remove outline */
+            background-color: #3b82f6; /* Blue background */
+            color: white; /* White text */
+            cursor: pointer; /* Add a mouse pointer on hover */
+            padding: 15px; /* Some padding */
+            border-radius: 50%; /* Rounded corners */
+            font-size: 18px; /* Increase font size */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+            transition: background-color 0.3s ease;
+        }
+
+        #scrollToTopBtn:hover {
+            background-color: #2563eb; /* Darker blue on hover */
+        }
+
+        /* Styles for search dropdown */
+        #searchResults {
+            position: absolute;
+            top: 100%; /* Position below the search input */
+            left: 0;
+            right: 0;
+            background-color: white;
+            border-radius: 0.5rem; /* rounded-md */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 100; /* Ensure it's above other content */
+            display: none; /* Hidden by default */
+        }
+        #searchResults a {
+            display: block;
+            padding: 0.75rem 1rem; /* p-3, px-4 */
+            color: #4a5568; /* gray-800 */
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+        #searchResults a:hover {
+            background-color: #e2e8f0; /* gray-200 */
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <!-- Header Section -->
+    <header class="bg-blue-600 text-white p-6 shadow-lg">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <h1 class="text-4xl font-bold mb-4 md:mb-0">Reuben's Odd Jobs</h1>
+            <nav class="w-full md:w-auto">
+                <ul class="flex flex-wrap justify-center space-x-4 md:space-x-6 text-lg mb-4 md:mb-0">
+                    <li><a href="#book" class="hover:text-blue-200 transition duration-300 rounded-md p-2">📋 Book</a></li>
+                    <li><a href="#reviews" class="hover:text-blue-200 transition duration-300 rounded-md p-2">🌟 Reviews</a></li>
+                    <li><a href="#faq" class="hover:text-blue-200 transition duration-300 rounded-md p-2">❓ FAQ</a></li>
+                    <li><a href="#services" class="hover:text-blue-200 transition duration-300 rounded-md p-2">🛠️ Services</a></li>
+                    <li><a href="#prices" class="hover:text-blue-200 transition duration-300 rounded-md p-2">💸 Prices</a></li>
+                    <li><a href="#hours" class="hover:text-blue-200 transition duration-300 rounded-md p-2">⏰ Hours</a></li>
+                    <li><a href="#support" class="hover:text-blue-200 transition duration-300 rounded-md p-2">🙏 Support</a></li>
+                </ul>
+                <!-- Search Bar with Dropdown Container -->
+                <div class="relative mt-4 md:mt-0 flex justify-center">
+                    <input type="text" id="siteSearch" onkeyup="filterContent()" placeholder="Search sections or FAQs..."
+                           class="w-full md:w-64 p-2 pl-10 rounded-full bg-white text-gray-800 border border-gray-300 focus:ring-blue-400 focus:border-blue-400 shadow-sm">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <div id="searchResults" class="w-full md:w-64"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-20 px-6 text-center shadow-inner rounded-b-xl">
+        <div class="container mx-auto">
+            <h2 class="text-5xl font-extrabold mb-6 animate-pulse">Your Go-To for All Things Odd!</h2>
+            <p class="text-xl max-w-2xl mx-auto mb-8">Reliable, friendly, and efficient help for tasks big and small.</p>
+            <a href="#book" class="bg-white text-blue-700 px-8 py-4 rounded-full text-xl font-semibold shadow-lg hover:bg-blue-100 transition duration-300 transform hover:scale-105">
+                Book a Helping Hand Today!
+            </a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 px-6 bg-white rounded-xl shadow-lg mt-8 mx-4 md:mx-auto max-w-6xl">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-4 text-blue-700">🛠️ Our Services</h2>
+            <p class="text-lg text-center text-gray-700 mb-12 italic">Prices listed are a guide and are negotiable based on task complexity.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Card: Technology Help -->
+                <div class="bg-blue-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 border-l-4 border-blue-500">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center">🖥️ Technology Help</h3>
+                    <p class="text-blue-600 font-medium mb-2">Price Range: <span class="font-bold">$10–$20</span></p>
+                    <p class="text-gray-700 mb-4">Examples: Troubleshooting, device setup, or providing basic tech support.</p>
+                </div>
+
+                <!-- Service Card: Cleaning -->
+                <div class="bg-green-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 border-l-4 border-green-500">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center">🧼 Cleaning</h3>
+                    <p class="text-green-600 font-medium mb-2">Price Range: <span class="font-bold">$15–$25</span></p>
+                    <p class="text-gray-700 mb-4">Examples: Light cleaning tasks around the home.</p>
+                </div>
+
+                <!-- Service Card: Party Help -->
+                <div class="bg-purple-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 border-l-4 border-purple-500">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center">🎉 Party Help</h3>
+                    <p class="text-purple-600 font-medium mb-2">Price Range: <span class="font-bold">$15–$25</span></p>
+                    <p class="text-gray-700 mb-4">Examples: Assisting with party setup, hosting, or post-party cleanup.</p>
+                </div>
+
+                <!-- Service Card: Pet Sitting -->
+                <div class="bg-yellow-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 border-l-4 border-yellow-500">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center">🐾 Pet Sitting</h3>
+                    <p class="text-yellow-600 font-medium mb-2">Price Range: <span class="font-bold">$10–$20</span></p>
+                    <p class="text-sm text-gray-500 italic">Special note: Please discuss details for large or unfamiliar dogs for safety.</p>
+                    <p class="text-gray-700 mb-4">Examples: Caring for pets, including feeding and ensuring their well-being.</p>
+                </div>
+
+                <!-- Service Card: Errands -->
+                <div class="bg-red-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 border-l-4 border-red-500">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center">🏃 Errands</h3>
+                    <p class="text-red-600 font-medium mb-2">Price Range: <span class="font-bold">$10–$15</span></p>
+                    <p class="text-gray-700 mb-4">Examples: Running errands such as shopping, deliveries, or small tasks.</p>
+                </div>
+
+                <!-- Service Card: Gardening -->
+                <div class="bg-lime-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 border-l-4 border-lime-500">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center">🌿 Gardening</h3>
+                    <p class="text-lime-600 font-medium mb-2">Price Range: <span class="font-bold">$15–$25</span></p>
+                    <p class="text-gray-700 mb-4">Examples: Watering plants, weeding, or other basic gardening tasks.</p>
+                </div>
+
+                <!-- Service Card: Senior Assistance -->
+                <div class="bg-fuchsia-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 border-l-4 border-fuchsia-500">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center">🧑‍⚕️ Senior Assistance</h3>
+                    <p class="text-fuchsia-600 font-medium mb-2">Price Range: <span class="font-bold">$10–$20</span></p>
+                    <p class="text-gray-700 mb-4">Examples: Light help around the house or providing companionship.</p>
+                </div>
+
+                <!-- Service Card: House Sitting -->
+                <div class="bg-teal-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 border-l-4 border-teal-500">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center">🏡 House Sitting</h3>
+                    <p class="text-teal-600 font-medium mb-2">Price Range: <span class="font-bold">$15–$25</span></p>
+                    <p class="text-gray-700 mb-4">Examples: Caring for homes, including watering plants, collecting mail, or general house monitoring.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prices Section - Reiteration, linking to services for detail -->
+    <section id="prices" class="py-16 px-6 bg-gray-100 rounded-xl shadow-lg mt-8 mx-4 md:mx-auto max-w-6xl">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-4 text-blue-700">💸 Our Prices</h2>
+            <p class="text-lg text-gray-700 mb-8 italic">Prices are negotiable and will be quoted before work begins.</p>
+            <p class="text-xl mb-4">Our pricing is transparent and competitive, designed to offer great value for reliable help.</p>
+            <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+                Each service has a clear price range, typically charged hourly. You can find detailed price examples within each service description in the <a href="#services" class="text-blue-600 hover:underline">Services section</a> above. We're happy to provide a custom quote for specific or larger tasks!
+            </p>
+        </div>
+    </section>
+
+    <!-- Book Section -->
+    <section id="book" class="py-16 px-6 bg-blue-700 text-white rounded-xl shadow-lg mt-8 mx-4 md:mx-auto max-w-6xl">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-8">📋 Book Your Odd Job!</h2>
+            <p class="text-xl mb-6 max-w-3xl mx-auto">Ready to get that task checked off your list? Fill out the form below to book a service with Reuben!</p>
+
+            <form id="bookingForm" onsubmit="sendBookingEmail(event)" class="max-w-xl mx-auto p-6 bg-blue-600 rounded-lg shadow-xl text-left space-y-6">
+                <!-- Service Selection -->
+                <div>
+                    <label for="service" class="block text-xl font-semibold mb-2">🛠️ What service do you need?</label>
+                    <select id="service" name="service_needed" required class="w-full p-3 rounded-md bg-white text-gray-800 border border-gray-300 focus:ring-blue-400 focus:border-blue-400">
+                        <option value="">Choose a service</option>
+                        <option value="Technology Help">🖥️ Technology Help</option>
+                        <option value="Cleaning">🧼 Cleaning</option>
+                        <option value="Party Help">🎉 Party Help – Setup or Cleaning After</option>
+                        <option value="Pet Sitting">🐾 Pet Sitting (Dogs: please share info if they’re large or unfamiliar – safety first!)</option>
+                        <option value="Errands">🏃 Errands</option>
+                        <option value="Gardening">🌿 Gardening</option>
+                        <option value="Senior Assistance">🧑‍⚕️ Senior Assistance (e.g., light help around the house, companionship)</option>
+                        <option value="House Sitting">🏡 House Sitting (including plant care, mail collection)</option>
+                    </select>
+                </div>
+
+                <!-- Availability Date and Time -->
+                <div>
+                    <label for="datetime" class="block text-xl font-semibold mb-2">📅 Availability Date and Time</label>
+                    <input type="datetime-local" id="datetime" name="availability_datetime" required class="w-full p-3 rounded-md bg-white text-gray-800 border border-gray-300 focus:ring-blue-400 focus:border-blue-400">
+                </div>
+
+                <!-- Facebook Username -->
+                <div>
+                    <label for="facebook_username" class="block text-xl font-semibold mb-2">📘 Facebook Username</label>
+                    <input type="text" id="facebook_username" name="facebook_username" placeholder="e.g., ReubenSmith" class="w-full p-3 rounded-md bg-white text-gray-800 border border-gray-300 focus:ring-blue-400 focus:border-blue-400">
+                </div>
+
+                <!-- Location -->
+                <div>
+                    <label for="location" class="block text-xl font-semibold mb-2">📍 Where are you?</label>
+                    <select id="location" name="client_location" required class="w-full p-3 rounded-md bg-white text-gray-800 border border-gray-300 focus:ring-blue-400 focus:border-blue-400">
+                        <option value="">Choose your area</option>
+                        <option value="East Albury">East Albury</option>
+                        <option value="Glenroy">Glenroy</option>
+                        <option value="Lavington">Lavington</option>
+                        <option value="North Albury">North Albury</option>
+                        <option value="South Albury">South Albury</option>
+                        <option value="Springdale Heights">Springdale Heights</option>
+                        <option value="Thurgoona">Thurgoona</option>
+                        <option value="West Albury">West Albury</option>
+                    </select>
+                </div>
+
+                <!-- Where do you live? (Street Address) -->
+                <div>
+                    <label for="address" class="block text-xl font-semibold mb-2">🏠 Where do you live? (Street Address)</label>
+                    <input type="text" id="address" name="street_address" placeholder="e.g., 123 Main St" required class="w-full p-3 rounded-md bg-white text-gray-800 border border-gray-300 focus:ring-blue-400 focus:border-blue-400">
+                </div>
+
+                <!-- Payment Type -->
+                <div>
+                    <label class="block text-xl font-semibold mb-2">💰 Payment Type</label>
+                    <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="payment_type" value="Bank Transfer" class="form-radio text-blue-400 h-5 w-5">
+                            <span class="ml-2 text-lg">Bank Transfer</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="payment_type" value="Cash" class="form-radio text-blue-400 h-5 w-5">
+                            <span class="ml-2 text-lg">In Cash</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- How much are you paying? (AUD) -->
+                <div>
+                    <label for="amount" class="block text-xl font-semibold mb-2">💸 How much are you paying? (AUD)</label>
+                    <input type="number" id="amount" name="payment_amount_aud" placeholder="e.g., 20.00" step="0.01" min="0" class="w-full p-3 rounded-md bg-white text-gray-800 border border-gray-300 focus:ring-blue-400 focus:border-blue-400">
+                </div>
+
+                <!-- Ask Reuben More (optional) -->
+                <div>
+                    <label for="message" class="block text-xl font-semibold mb-2">💬 Ask Reuben More (optional)</label>
+                    <textarea id="message" name="client_message" rows="4" placeholder="Any additional details or questions for Reuben?" class="w-full p-3 rounded-md bg-white text-gray-800 border border-gray-300 focus:ring-blue-400 focus:border-blue-400"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full bg-white text-blue-700 px-6 py-3 rounded-full text-xl font-semibold shadow-lg hover:bg-blue-100 transition duration-300 transform hover:scale-105">
+                    Submit Booking
+                </button>
+            </form>
+            <p class="mt-8 text-lg opacity-90">Once you submit your booking, Reuben will get back to you to confirm the details and arrange a time that suits you. Thanks!</p>
+        </div>
+    </section>
+
+    <!-- Hours Section -->
+    <section id="hours" class="py-16 px-6 bg-white rounded-xl shadow-lg mt-8 mx-4 md:mx-auto max-w-6xl">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-8 text-blue-700">⏰ Our Hours</h2>
+            <p class="text-xl mb-6">Reuben's Odd Jobs is typically available for service during the following times:</p>
+
+            <div class="mb-8">
+                <h3 class="text-3xl font-semibold text-gray-800 mb-4">📘 During School Terms:</h3>
+                <ul class="list-none text-left text-lg max-w-md mx-auto space-y-2">
+                    <li class="flex justify-between items-center py-1 border-b border-gray-200 last:border-b-0">
+                        <span class="font-semibold w-1/2">Monday:</span>
+                        <span class="w-1/2 text-right">3:30 PM – 4:00 PM 🕒</span>
+                    </li>
+                    <li class="flex justify-between items-center py-1 border-b border-gray-200 last:border-b-0">
+                        <span class="font-semibold w-1/2">Tuesday:</span>
+                        <span class="w-1/2 text-right text-red-500">CLOSED 🚫</span>
+                    </li>
+                    <li class="flex justify-between items-center py-1 border-b border-gray-200 last:border-b-0">
+                        <span class="font-semibold w-1/2">Wednesday:</span>
+                        <span class="w-1/2 text-right text-red-500">CLOSED 🚫</span>
+                    </li>
+                    <li class="flex justify-between items-center py-1 border-b border-gray-200 last:border-b-0">
+                        <span class="font-semibold w-1/2">Thursday:</span>
+                        <span class="w-1/2 text-right">3:30 PM – 6:00 PM 🕒</span>
+                    </li>
+                    <li class="flex justify-between items-center py-1 border-b border-gray-200 last:border-b-0">
+                        <span class="font-semibold w-1/2">Friday:</span>
+                        <span class="w-1/2 text-right">3:30 PM – 6:00 PM 🕒</span>
+                    </li>
+                    <li class="flex justify-between items-center py-1 border-b border-gray-200 last:border-b-0">
+                        <span class="font-semibold w-1/2">Saturday:</span>
+                        <span class="w-1/2 text-right">11:00 AM – 6:30 PM 🕚</span>
+                    </li>
+                    <li class="flex justify-between items-center py-1 border-b border-gray-200 last:border-b-0">
+                        <span class="font-semibold w-1/2">Sunday:</span>
+                        <span class="w-1/2 text-right">11:30 AM – 6:30 PM 🕦</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="text-3xl font-semibold text-gray-800 mb-4">🏖️ During School Holidays & Public Holidays:</h3>
+                <ul class="list-none text-left text-lg max-w-md mx-auto space-y-2">
+                    <li class="flex justify-between items-center py-1 border-b border-gray-200 last:border-b-0">
+                        <span class="font-semibold w-1/2">Monday to Sunday:</span>
+                        <span class="w-1/2 text-right">11:00 AM – 7:30 PM 🕚</span>
+                    </li>
+                    <li class="flex justify-between items-center py-1 border-b border-gray-200 last:border-b-0">
+                        <span class="font-semibold w-1/2">Tuesday:</span>
+                        <span class="w-1/2 text-right text-red-500">CLOSED 🚫</span>
+                    </li>
+                </ul>
+            </div>
+
+            <p class="mt-6 text-lg text-gray-700 max-w-2xl mx-auto">
+                <span class="font-semibold">🎄 Special Notices:</span> We are **CLOSED** on Christmas, New Year’s Day, and Easter. Please book ahead around these dates!
+            </p>
+            <p class="mt-4 text-lg text-gray-700 max-w-2xl mx-auto">
+                <span class="font-semibold">📞 After-Hours Info:</span> We do not visit homes after 6:00 PM. However, you’re welcome to contact us for questions or bookings after that time — we’re happy to help remotely. 😊
+            </p>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-16 px-6 bg-gray-100 rounded-xl shadow-lg mt-8 mx-4 md:mx-auto max-w-6xl">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-2 text-blue-700">🌟 What Our Customers Say</h2>
+            <p class="text-lg text-gray-600 mb-8 italic">(Our customer reviews are updated monthly!)</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- Existing Review 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-400">
+                    <p class="italic text-lg mb-4">"Reuben fixed my computer in no time! So quick and knowledgeable. Highly recommend for tech issues!"</p>
+                    <p class="font-semibold text-blue-600">- Alex P.</p>
+                </div>
+                <!-- Existing Review 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-blue-400">
+                    <p class="italic text-lg mb-4">"Fantastic help with our garden. Everything looks so neat and tidy now. Will definitely call again!"</p>
+                    <p class="font-semibold text-blue-600">- Sarah L.</p>
+                </div>
+            </div>
+
+            <h3 class="text-3xl font-bold mb-6 text-blue-700">Leave a Review!</h3>
+            <form id="reviewForm" onsubmit="sendReviewEmail(event)" class="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-xl text-left space-y-6">
+                <!-- Reviewer Name -->
+                <div>
+                    <label for="reviewer_name" class="block text-xl font-semibold mb-2">Your Name (Optional)</label>
+                    <input type="text" id="reviewer_name" name="reviewer_name" placeholder="e.g., Happy Customer" class="w-full p-3 rounded-md bg-gray-50 text-gray-800 border border-gray-300 focus:ring-blue-400 focus:border-blue-400">
+                </div>
+
+                <!-- Service Used -->
+                <div>
+                    <label for="service_reviewed" class="block text-xl font-semibold mb-2">Which service did you use?</label>
+                    <select id="service_reviewed" name="service_reviewed" required class="w-full p-3 rounded-md bg-gray-50 text-gray-800 border border-gray-300 focus:ring-blue-400 focus:border-blue-400">
+                        <option value="">Choose a service</option>
+                        <option value="Technology Help">🖥️ Technology Help</option>
+                        <option value="Cleaning">🧼 Cleaning</option>
+                        <option value="Party Help">🎉 Party Help – Setup or Cleaning After</option>
+                        <option value="Pet Sitting">🐾 Pet Sitting</option>
+                        <option value="Errands">🏃 Errands</option>
+                        <option value="Gardening">🌿 Gardening</option>
+                        <option value="Senior Assistance">🧑‍⚕️ Senior Assistance</option>
+                        <option value="House Sitting">🏡 House Sitting</option>
+                    </select>
+                </div>
+
+                <!-- Rating (Dropdown) -->
+                <div>
+                    <label for="rating" class="block text-xl font-semibold mb-2">Your Rating (1-5 Stars)</label>
+                    <select id="rating" name="rating" required class="w-full p-3 rounded-md bg-gray-50 text-gray-800 border border-gray-300 focus:ring-blue-400 focus:border-blue-400">
+                        <option value="">Select a rating</option>
+                        <option value="5">5 Stars - Excellent</option>
+                        <option value="4">4 Stars - Very Good</option>
+                        <option value="3">3 Stars - Good</option>
+                        <option value="2">2 Stars - Fair</option>
+                        <option value="1">1 Star - Poor</option>
+                    </select>
+                </div>
+
+                <!-- Review Comment -->
+                <div>
+                    <label for="review_comment" class="block text-xl font-semibold mb-2">Your Review / Comment</label>
+                    <textarea id="review_comment" name="review_comment" rows="6" placeholder="Share your experience with Reuben's Odd Jobs!" required class="w-full p-3 rounded-md bg-gray-50 text-gray-800 border border-gray-300 focus:ring-blue-400 focus:border-blue-400"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full bg-blue-600 text-white px-6 py-3 rounded-full text-xl font-semibold shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+                    Submit Review
+                </button>
+            </form>
+            <p class="mt-8 text-lg text-gray-700 opacity-90">Thank you for helping us improve our services!</p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 px-6 bg-white rounded-xl shadow-lg mt-8 mx-4 md:mx-auto max-w-6xl">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12 text-blue-700">❓ Frequently Asked Questions</h2>
+            <div class="space-y-6" id="faq-list">
+                <!-- FAQ Item: Examples of jobs you don't do? -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm faq-item">
+                    <h3 class="text-xl font-semibold mb-2 faq-question">❌ What are some examples of jobs you don't do?</h3>
+                    <p class="text-gray-700 faq-answer">I don’t take on heavy construction, electrical work, plumbing, or anything that requires a trade license. I also don’t do full-house deep cleans or lawn mowing at this stage. If you're unsure, just ask! 😊</p>
+                </div>
+                <!-- FAQ Item: What areas do you service? -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm faq-item">
+                    <h3 class="text-xl font-semibold mb-2 faq-question">📍 What areas do you service?</h3>
+                    <p class="text-gray-700 faq-answer">I currently serve the following areas around Albury, NSW:</p>
+                    <ul class="list-disc list-inside text-gray-700 ml-4">
+                        <li>Lavington</li>
+                        <li>Glenroy</li>
+                        <li>Springdale Heights</li>
+                        <li>Albury</li>
+                        <li>Thurgoona</li>
+                    </ul>
+                    <p class="text-gray-700 mt-2">If you live just outside these areas, message me and I’ll see what I can do! 😊 Please note: There may be a small fee for locations outside my regular service zone to cover transport costs. I will let you know in advance if the fee applies.</p>
+                </div>
+                <!-- FAQ Item: Why is there a travel fee for some areas? -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm faq-item">
+                    <h3 class="text-xl font-semibold mb-2 faq-question">💰 Why is there a travel fee for some areas?</h3>
+                    <p class="text-gray-700 faq-answer">Even though I don’t drive yet, I rely on public transport or family to get to jobs outside my main service areas. The travel fee helps cover these transport costs. I'll always let you know in advance if it applies — no surprises! 👍</p>
+                </div>
+                <!-- FAQ Item: How do I book your services? -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm faq-item">
+                    <h3 class="text-xl font-semibold mb-2 faq-question">📲 How do I book your services?</h3>
+                    <p class="text-gray-700 faq-answer">You can book a job using the booking form on my website 📝 — it's quick and easy! If you have any questions before booking, feel free to message me through:
+                    <ul class="list-disc list-inside text-gray-700 ml-4">
+                        <li>Facebook Messenger 💬</li>
+                    </ul>
+                    Once you submit a booking, I’ll get back to you to confirm the details and arrange a time that suits you. 👍</p>
+                </div>
+                <!-- FAQ Item: What is your cancellation policy? -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm faq-item">
+                    <h3 class="text-xl font-semibold mb-2 faq-question">❗ What is your cancellation policy?</h3>
+                    <p class="text-gray-700 faq-answer">Life happens — if you need to cancel or reschedule, please let me know at least 24 hours in advance. No cancellation fees if you give me notice!</p>
+                </div>
+                <!-- FAQ Item: How do you determine your pricing? -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm faq-item">
+                    <h3 class="text-xl font-semibold mb-2 faq-question">💵 How do you determine your pricing?</h3>
+                    <p class="text-gray-700 faq-answer">Prices depend on the type of job, how long it takes, and what’s involved. I aim to keep my rates affordable and fair. You’ll always get a quote before I start!</p>
+                </div>
+                <!-- FAQ Item: What forms of payment do you accept? -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm faq-item">
+                    <h3 class="text-xl font-semibold mb-2 faq-question">💳 What forms of payment do you accept?</h3>
+                    <p class="text-gray-700 faq-answer">I currently accept:
+                    <ul class="list-disc list-inside text-gray-700 ml-4">
+                        <li>Cash 💵</li>
+                        <li>Bank transfer 💻</li>
+                    </ul></p>
+                </div>
+                <!-- FAQ Item: What if I’m not satisfied with the work? -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm faq-item">
+                    <h3 class="text-xl font-semibold mb-2 faq-question">😕 What if I’m not satisfied with the work?</h3>
+                    <p class="text-gray-700 faq-answer">Your satisfaction matters. If there’s a problem, please let me know within 24 hours and I’ll do my best to fix it or offer a fair solution. 👍</p>
+                </div>
+                <!-- FAQ Item: Who is Reuben, and what is his experience? -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm faq-item">
+                    <h3 class="text-xl font-semibold mb-2 faq-question">👨‍🔧 Who is Reuben, and what is his experience?</h3>
+                    <p class="text-gray-700 faq-answer">Hi! I’m Reuben — I’m 15 years old and based in Albury, NSW. I’ve started Reuben’s Odd Jobs to help people in my community with everyday tasks. I’ve had experience with tech troubleshooting, cleaning, pet care (I have 9 guinea pigs myself 🐹), and more. I take pride in doing every job right!</p>
+                </div>
+                <!-- FAQ Item: How should I contact you through my website? -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm faq-item">
+                    <h3 class="text-xl font-semibold mb-2 faq-question">🌐 How should I contact you through my website?</h3>
+                    <p class="text-gray-700 faq-answer">You can contact me anytime through my website's support or booking form. Once I receive your message, I’ll try to respond as soon as I can. When I’m available, I’ll follow up with you on Facebook Messenger. Thanks for reaching out!</p>
+                </div>
+                <!-- FAQ Item: Are there support options available? -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm faq-item">
+                    <h3 class="text-xl font-semibold mb-2 faq-question">❓ Are there support options available?</h3>
+                    <p class="text-gray-700 faq-answer">Yes, you can find support information in the <a href="#support" class="text-blue-600 hover:underline">support section</a> of the website.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section id="support" class="py-16 px-6 bg-blue-600 text-white rounded-xl shadow-lg mt-8 mx-4 md:mx-auto max-w-6xl">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-8">🙏 Need More Support?</h2>
+            <p class="text-xl mb-6 max-w-3xl mx-auto">We're here to help! If you have any questions, concerns, or need further assistance, please don't hesitate to reach out.</p>
+            <div class="space-y-4">
+                <p class="text-2xl font-semibold">📞 Call Us: <a href="tel:0260408857" class="underline hover:text-blue-200 transition duration-300">0260408857</a></p>
+                <p class="text-2xl font-semibold">📧 Email Us: <a href="mailto:reubenoddjobalbury@gmail.com" class="underline hover:text-blue-200 transition duration-300">reubenoddjobalbury@gmail.com</a></p>
+                <p class="text-2xl font-semibold">💬 Facebook Messenger: <a href="https://m.me/reubensoddjobs" target="_blank" class="underline hover:text-blue-200 transition duration-300">Reuben's Odd Jobs</a></p>
+            </div>
+            <p class="mt-8 text-lg opacity-90">Your satisfaction is our priority.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 px-6 mt-8">
+        <div class="container mx-auto text-center">
+            <p>&copy; <span id="currentYear"></span> Reuben's Odd Jobs. All rights reserved.</p>
+            <p class="mt-2 text-sm">Serving the Lavington, New South Wales, Australia area.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button onclick="topFunction()" id="scrollToTopBtn" title="Go to top">↑</button>
+
+    <script>
+        // Get the current year for the footer
+        document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+        // Get the button
+        let mybutton = document.getElementById("scrollToTopBtn");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+
+        // Search functionality
+        const searchableItems = [];
+
+        console.log("Reuben's Odd Jobs script loading...");
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("DOM fully loaded and parsed. Initializing search items.");
+            // Populate searchable items with section titles
+            const sections = ['services', 'prices', 'book', 'hours', 'reviews', 'faq', 'support'];
+            sections.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    const titleElement = element.querySelector('h2');
+                    if (titleElement) {
+                        searchableItems.push({
+                            text: titleElement.textContent.trim(),
+                            id: id,
+                            type: 'section'
+                        });
+                    }
+                }
+            });
+
+            // Populate searchable items with FAQ questions
+            const faqItems = document.querySelectorAll('#faq-list .faq-item');
+            faqItems.forEach(item => {
+                const questionElement = item.querySelector('.faq-question');
+                if (questionElement) {
+                    searchableItems.push({
+                        text: questionElement.textContent.trim(),
+                        id: 'faq', // All FAQ questions link to the FAQ section
+                        type: 'faq-question'
+                    });
+                }
+            });
+            console.log("Searchable items populated:", searchableItems.length);
+
+            // Hide search results when clicking outside
+            document.addEventListener('click', function(event) {
+                const searchBar = document.getElementById('siteSearch');
+                const searchResults = document.getElementById('searchResults');
+                if (searchBar && searchResults && !searchBar.contains(event.target) && !searchResults.contains(event.target)) {
+                    searchResults.style.display = 'none';
+                }
+            });
+        });
+
+        function filterContent() {
+            let input = document.getElementById('siteSearch');
+            let filter = input.value.toLowerCase();
+            let searchResultsDiv = document.getElementById('searchResults');
+            searchResultsDiv.innerHTML = ''; // Clear previous results
+
+            if (filter.length === 0) {
+                searchResultsDiv.style.display = 'none';
+                // Also ensure all FAQ items are visible if search is cleared
+                const faqItems = document.querySelectorAll('#faq-list .faq-item');
+                faqItems.forEach(item => {
+                    item.style.display = '';
+                });
+                return;
+            }
+
+            let foundResults = false;
+            searchableItems.forEach(item => {
+                if (item.text.toLowerCase().includes(filter)) {
+                    const resultLink = document.createElement('a');
+                    resultLink.href = '#' + item.id;
+                    resultLink.textContent = item.text;
+                    resultLink.onclick = function(event) {
+                        event.preventDefault(); // Prevent default link behavior
+                        document.getElementById(item.id).scrollIntoView({ behavior: 'smooth' });
+                        searchResultsDiv.style.display = 'none'; // Hide results after clicking
+                        input.value = ''; // Clear search bar
+                        // If navigating to FAQ, ensure all FAQ items are visible
+                        if (item.id === 'faq') {
+                            const faqItems = document.querySelectorAll('#faq-list .faq-item');
+                            faqItems.forEach(faqItem => {
+                                faqItem.style.display = ''; // Show all FAQ items
+                            });
+                        }
+                    };
+                    searchResultsDiv.appendChild(resultLink);
+                    foundResults = true;
+                }
+            });
+
+            if (foundResults) {
+                searchResultsDiv.style.display = 'block';
+            } else {
+                searchResultsDiv.style.display = 'none';
+            }
+
+            // Also handle filtering of FAQ items directly for visual effect on the page
+            const faqItems = document.querySelectorAll('#faq-list .faq-item');
+            faqItems.forEach(item => {
+                const faqQuestion = item.querySelector('.faq-question');
+                const faqAnswer = item.querySelector('.faq-answer');
+                if (faqQuestion && faqAnswer) {
+                    if (faqQuestion.textContent.toLowerCase().includes(filter) || faqAnswer.textContent.toLowerCase().includes(filter)) {
+                        item.style.display = ''; // Show the FAQ item
+                    } else {
+                        item.style.display = 'none'; // Hide the FAQ item
+                    }
+                }
+            });
+        }
+
+        try {
+            // EmailJS Initialization
+            emailjs.init("sAd5MShcKI1IUod7j"); // Reuben's Public Key
+            console.log("EmailJS SDK initialized with public key.");
+        } catch (e) {
+            console.error("Failed to initialize EmailJS SDK:", e);
+            // In a real application, you might show a user-friendly message here.
+        }
+
+        // Function to send Booking Form Email
+        function sendBookingEmail(event) {
+            event.preventDefault(); // Prevent default form submission
+            console.log("Attempting to send booking email...");
+
+            const serviceID = "service_sn9fq8e"; // Reuben's Service ID
+            const templateID = "template_ysarvgi"; // Reuben's Booking Template ID
+
+            try {
+                // Changed 'this' to 'event.target' for more robust form reference
+                emailjs.sendForm(serviceID, templateID, event.target)
+                    .then(() => {
+                        alert('Your booking request has been sent successfully! Reuben will get back to you soon.');
+                        document.getElementById('bookingForm').reset(); // Clear the form
+                        console.log("Booking email sent successfully.");
+                    }, (error) => {
+                        alert('Failed to send your booking request. Please try again or contact Reuben directly. Check console for details.');
+                        console.error('Failed to send booking email:', error);
+                    });
+            } catch (e) {
+                alert('An unexpected error occurred while trying to send the booking email. Please contact Reuben directly.');
+                console.error("Error during emailjs.sendForm for booking:", e);
+            }
+        }
+
+        // Function to send Review Form Email
+        function sendReviewEmail(event) {
+            event.preventDefault(); // Prevent default form submission
+            console.log("Attempting to send review email...");
+
+            const serviceID = "service_sn9fq8e"; // Reuben's Service ID (same as booking, as per user input)
+            const templateID = "template_8ymjygf"; // Reuben's Review Template ID
+
+            try {
+                // Changed 'this' to 'event.target' for more robust form reference
+                emailjs.sendForm(serviceID, templateID, event.target)
+                    .then(() => {
+                        alert('Thank you for your review! We appreciate your feedback.');
+                        document.getElementById('reviewForm').reset(); // Clear the form
+                        console.log("Review email sent successfully.");
+                    }, (error) => {
+                        alert('Failed to send your review. Please try again. Check console for details.');
+                        console.error('Failed to send review email:', error);
+                    });
+            } catch (e) {
+                alert('An unexpected error occurred while trying to send the review email. Please try again.');
+                console.error("Error during emailjs.sendForm for review:", e);
+            }
+        }
+    </script>
+</body>
+</html>
