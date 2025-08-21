@@ -16,7 +16,6 @@
         .gradient-header {
             background-image: linear-gradient(to right, #3B82F6, #9333EA);
         }
-        /* No need for .contact-box-link styling as buttons are now direct actions */
     </style>
 </head>
 <body class="text-gray-800">
@@ -24,51 +23,643 @@
     <!-- Header Section -->
     <header class="gradient-header py-12 px-4 sm:px-6 lg:px-8 text-center rounded-b-xl shadow-lg">
         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight">Contact Us for Support</h1>
-        <p class="mt-4 text-xl sm:text-2xl text-white opacity-90">Reach out to us using the details below.</p>
+        <p class="mt-4 text-xl sm:text-2xl text-white opacity-90">Please fill out the form below to get in touch with us.</p>
     </header>
 
     <!-- Main content area -->
     <main class="container mx-auto p-4 sm:p-6 lg:p-8 mt-8">
 
-        <!-- Contact Information Section -->
-        <section class="bg-white p-6 sm:p-8 rounded-xl shadow-md mb-8 text-center">
-            <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6 border-b-2 border-purple-500 pb-3">Get in Touch</h2>
-            <p class="text-lg sm:text-xl text-gray-700 mb-8">We're here to help! Contact us directly via email or phone.</p>
-
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
-                <!-- Email Contact Box -->
-                <div class="bg-blue-50 p-6 rounded-lg shadow-inner flex flex-col items-center w-full sm:w-1/2 md:w-1/3">
-                    <span class="text-blue-600 text-4xl mb-3">📧</span>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Email Us</h3>
-                    <p class="text-blue-700 text-lg font-medium break-all mb-4" id="contactEmail">reubensoddjobalbury.help@gmail.com</p>
-                    <a href="mailto:reubensoddjobalbury.help@gmail.com" 
-                       class="px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-200 shadow">
-                        Email Now
-                    </a>
+        <!-- Contact Form Section -->
+        <section class="bg-white p-6 sm:p-8 rounded-xl shadow-md mb-8">
+            <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6 border-b-2 border-purple-500 pb-3 text-center">Submit a Request</h2>
+            
+            <form id="supportForm" class="space-y-6">
+                <!-- User Information -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label for="fullName" class="block text-sm font-medium text-gray-700">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required
+                               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 transition duration-150">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                        <input type="email" id="email" name="email" required
+                               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 transition duration-150">
+                    </div>
+                    <div>
+                        <label for="phoneNumber" class="block text-sm font-medium text-gray-700">Phone Number (Optional)</label>
+                        <input type="tel" id="phoneNumber" name="phoneNumber"
+                               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 transition duration-150">
+                    </div>
                 </div>
 
-                <!-- Phone Contact Box -->
-                <div class="bg-purple-50 p-6 rounded-lg shadow-inner flex flex-col items-center w-full sm:w-1/2 md:w-1/3">
-                    <span class="text-purple-600 text-4xl mb-3">📞</span>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Call Us</h3>
-                    <p class="text-purple-700 text-lg font-medium mb-4" id="contactPhone">0260408857</p>
-                    <a href="tel:+61260408857" 
-                       class="px-5 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition duration-200 shadow">
-                        Call Now
-                    </a>
+                <!-- Preferred Contact Dropdown -->
+                <div>
+                    <label for="contactPreference" class="block text-sm font-medium text-gray-700">What type of contact do you prefer?</label>
+                    <select id="contactPreference" name="contactPreference" required
+                            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 transition duration-150">
+                        <option value="">Select an option</option>
+                        <option value="Email">Email</option>
+                        <option value="Phone Call">Phone Call</option>
+                    </select>
                 </div>
+
+                <!-- Category and Subcategory Dropdowns -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+                        <select id="category" name="category" required
+                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 transition duration-150">
+                            <option value="">Select a Category</option>
+                        </select>
+                    </div>
+                    <!-- This div will be hidden until a category is selected -->
+                    <div id="subcategoryContainer" class="hidden">
+                        <label for="subcategory" class="block text-sm font-medium text-gray-700">Subcategory</label>
+                        <select id="subcategory" name="subcategory" required
+                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 transition duration-150">
+                            <option value="">Select a Subcategory</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Message Text Area -->
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-700">Your Message</label>
+                    <textarea id="message" name="message" rows="5" required
+                              class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 transition duration-150"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div>
+                    <button type="submit"
+                            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-lg font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition duration-150">
+                        Submit Request
+                    </button>
+                </div>
+            </form>
+            
+            <!-- Confirmation Message Modal -->
+            <div id="confirmationMessage" class="hidden mt-6 p-4 rounded-lg text-white bg-green-500 shadow-md transition duration-300 ease-in-out">
+                Thank you for contacting us. Please wait at least 2-5 business days for a response.
             </div>
+
         </section>
     </main>
 
     <script>
-        // Define the contact details
-        const CONTACT_EMAIL = "reubensoddjobalbury.help@gmail.com";
-        const CONTACT_PHONE = "0260408857";
+        // Updated data structure with the new, comprehensive list of categories and subcategories
+        const SUPPORT_DATA = [
+            {
+                category: "Booking Problems 📝",
+                subcategories: ["Trouble submitting booking form", "Didn’t receive booking confirmation", "Duplicate booking made", "Wrong date/time selected", "Last-minute booking issue"]
+            },
+            {
+                category: "Rescheduling & Cancellations ⏰",
+                subcategories: ["Need to reschedule a job", "How to cancel a booking", "Cancellation fees explained", "Last-minute cancellation request", "Rebooking after cancellation"]
+            },
+            {
+                category: "Payments 💳",
+                subcategories: ["Payment not going through", "Charged the wrong amount", "Refund request", "Double payment made", "Payment method not supported"]
+            },
+            {
+                category: "Pricing Questions 💲",
+                subcategories: ["General pricing information", "Discounts available", "Loyalty deals or packages", "Hourly vs flat rates", "Price mismatch on website"]
+            },
+            {
+                category: "Receipts & Invoices 🧾",
+                subcategories: ["Need a receipt copy", "Invoice correction request", "Didn’t receive my invoice", "Tax/GST questions", "Wrong name on receipt"]
+            },
+            {
+                category: "Communication 📞",
+                subcategories: ["Didn’t get a reply", "How long until response?", "Wrong contact details", "Prefer text updates", "Prefer email updates"]
+            },
+            {
+                category: "Availability 📅",
+                subcategories: ["No time slots available", "Fully booked for my date", "Requesting urgent booking", "Weekend/holiday availability", "How far ahead can I book?"]
+            },
+            {
+                category: "Location & Areas 🌍",
+                subcategories: ["Is my suburb covered?", "Jobs outside Albury/Lavington", "Extra travel charges", "Expanding service areas", "Clarify exact coverage map"]
+            },
+            {
+                category: "Service Information ℹ️",
+                subcategories: ["How jobs are scheduled", "Estimated job duration", "What to expect during a booking", "Job priority questions", "Clarifying rules and guidelines"]
+            },
+            {
+                category: "Privacy & Security 🔒",
+                subcategories: ["How is my data used?", "Security of online forms", "Data storage location", "Sharing info with third parties", "Deleting my data"]
+            },
+            {
+                category: "Support Response Times ⏳",
+                subcategories: ["How long do replies take?", "No response received yet", "Need urgent help", "Delayed email response", "Chat/message not answered"]
+            },
+            {
+                category: "Feedback & Suggestions 🗣️",
+                subcategories: ["Leave positive feedback", "Share improvement ideas", "Report a minor issue", "Suggestions for new features", "Rate my experience"]
+            },
+            {
+                category: "Complaints ⚠️",
+                subcategories: ["Report a bad experience", "Formal complaint submission", "Not satisfied with resolution", "Escalate complaint", "How complaints are handled"]
+            },
+            {
+                category: "Lost & Found 🔑",
+                subcategories: ["Lost item during booking", "Found item not mine", "How to return found item", "Missing belongings report", "Follow-up on lost item"]
+            },
+            {
+                category: "Safety Concerns 🚨",
+                subcategories: ["General safety question", "Emergency during booking", "Unsafe environment noticed", "Reporting unsafe behaviour", "Clarification of safety rules"]
+            },
+            {
+                category: "Special Requests ⭐",
+                subcategories: ["Custom one-off request", "Urgent exception needed", "Unusual time or date", "Special instructions", "Requests outside normal policy"]
+            },
+            {
+                category: "Documents & Policies 📋",
+                subcategories: ["Terms & conditions explained", "Refund policy details", "Privacy policy details", "Code of conduct", "Request a copy of policies"]
+            },
+            {
+                category: "Weather Impacts 🌦️",
+                subcategories: ["Job cancelled due to rain", "Hot weather changes", "Extreme cold issues", "Rescheduling after weather", "Policy for bad weather"]
+            },
+            {
+                category: "Delays & Timing ⏱️",
+                subcategories: ["Late arrival", "Didn’t show up", "Arrived too early", "Running overtime", "Need flexible timing"]
+            },
+            {
+                category: "Travel & Extra Fees 🚗",
+                subcategories: ["Extra travel fee confusion", "Out-of-area fee questions", "Unexpected extra charge", "Fee not explained before booking", "Requesting fee breakdown"]
+            },
+            {
+                category: "Multiple Bookings 📚",
+                subcategories: ["Two bookings at same time", "Overlapping jobs confusion", "Linking multiple bookings", "Cancelling one of several", "Updating group bookings"]
+            },
+            {
+                category: "System Errors 🖥️",
+                subcategories: ["Website not working", "Booking form won’t submit", "Error message when paying", "Page won’t load", "Form fields not saving"]
+            },
+            {
+                category: "Notification Issues 🔔",
+                subcategories: ["Didn’t get booking notification", "Got duplicate notifications", "Wrong info in notification", "Delayed notification", "Notifications in wrong format"]
+            },
+            {
+                category: "General Information ℹ️",
+                subcategories: ["How does Odd Jobs work?", "What’s the process step-by-step?", "FAQ request", "Where to find contact info", "Who runs Odd Jobs?"]
+            },
+            {
+                category: "Other Help 🤝",
+                subcategories: ["Not sure what to pick", "Catch-all question", "Need human assistance", "My issue isn’t listed", "Miscellaneous request"]
+            }
+        ];
 
-        // Update the display with the contact details (optional, as they are hardcoded in HTML)
-        document.getElementById('contactEmail').textContent = CONTACT_EMAIL;
-        document.getElementById('contactPhone').textContent = CONTACT_PHONE;
+        const categorySelect = document.getElementById('category');
+        const subcategoryContainer = document.getElementById('subcategoryContainer');
+        const subcategorySelect = document.getElementById('subcategory');
+        const form = document.getElementById('supportForm');
+        const confirmationMessage = document.getElementById('confirmationMessage');
+
+        /**
+         * Populates the category dropdown with options from the SUPPORT_DATA array.
+         */
+        function populateCategories() {
+            SUPPORT_DATA.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.category;
+                option.textContent = item.category;
+                categorySelect.appendChild(option);
+            });
+        }
+
+        /**
+         * Populates the subcategory dropdown based on the selected category.
+         */
+        function populateSubcategories() {
+            const selectedCategory = categorySelect.value;
+            // Clear existing subcategory options
+            subcategorySelect.innerHTML = '<option value="">Select a Subcategory</option>';
+            
+            const selectedCategoryData = SUPPORT_DATA.find(item => item.category === selectedCategory);
+            
+            if (selectedCategoryData) {
+                // Show the subcategory container and populate the options
+                subcategoryContainer.classList.remove('hidden');
+                selectedCategoryData.subcategories.forEach(subcategory => {
+                    const option = document.createElement('option');
+                    option.value = subcategory;
+                    option.textContent = subcategory;
+                    subcategorySelect.appendChild(option);
+                });
+            } else {
+                // Hide the subcategory container if no category is selected
+                subcategoryContainer.classList.add('hidden');
+            }
+        }
+
+        /**
+         * Handles the form submission event.
+         * Prevents default form submission and shows a success message.
+         * @param {Event} event - The form submission event.
+         */
+        async function handleFormSubmission(event) {
+            event.preventDefault(); // Stop the form from submitting normally
+
+            const webhookUrl = 'https://discord.com/api/webhooks/1408062131097698335/NoBM8D3toamNa2zVE9-8ad6d01_Le8eGIsRMNtnBDi8HHt4leuFJr0fRXDmvAb1fGHhd';
+            const formData = new FormData(form);
+
+            const fullName = formData.get('fullName');
+            const email = formData.get('email');
+            const phoneNumber = formData.get('phoneNumber') || 'N/A'; // Use N/A if optional phone number is not provided
+            const contactPreference = formData.get('contactPreference');
+            const category = formData.get('category');
+            const subcategory = formData.get('subcategory');
+            const message = formData.get('message');
+
+            const payload = {
+                username: "Odd Jobs Support Form",
+                embeds: [{
+                    title: "New Support Request Submitted",
+                    description: `A new support request has been submitted through the website form.`,
+                    color: 3447003, // A nice blue color for the embed
+                    fields: [
+                        { name: "Full Name", value: fullName, inline: true },
+                        { name: "Email Address", value: email, inline: true },
+                        { name: "Phone Number", value: phoneNumber, inline: true },
+                        { name: "Contact Preference", value: contactPreference, inline: true },
+                        { name: "Category", value: category, inline: false },
+                        { name: "Subcategory", value: subcategory, inline: false },
+                        { name: "Message", value: message, inline: false }
+                    ],
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            try {
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload),
+                });
+
+                if (response.ok) {
+                    // Show success message and reset form
+                    confirmationMessage.classList.remove('hidden');
+                    confirmationMessage.classList.add('animate-fadeIn');
+
+                    setTimeout(() => {
+                        form.reset();
+                        confirmationMessage.classList.add('hidden');
+                        populateSubcategories();
+                    }, 5000); // Wait 5 seconds before resetting the form
+                } else {
+                    // Handle server errors
+                    console.error('Failed to send message to Discord webhook.', response.status, response.statusText);
+                    alert('There was an error submitting your request. Please try again.');
+                }
+            } catch (error) {
+                // Handle network errors
+                console.error('An error occurred during the fetch operation:', error);
+                alert('A network error occurred. Please check your connection and try again.');
+            }
+        }
+
+        // Event listeners
+        window.addEventListener('load', populateCategories);
+        categorySelect.addEventListener('change', populateSubcategories);
+        form.addEventListener('submit', handleFormSubmission);
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us for Support</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7; /* Light gray background for the entire page */
+        }
+        .gradient-header {
+            background-image: linear-gradient(to right, #3B82F6, #9333EA);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header Section -->
+    <header class="gradient-header py-12 px-4 sm:px-6 lg:px-8 text-center rounded-b-xl shadow-lg">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight">Contact Us for Support</h1>
+        <p class="mt-4 text-xl sm:text-2xl text-white opacity-90">Please fill out the form below to get in touch with us.</p>
+    </header>
+
+    <!-- Main content area -->
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8 mt-8">
+
+        <!-- Contact Form Section -->
+        <section class="bg-white p-6 sm:p-8 rounded-xl shadow-md mb-8">
+            <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6 border-b-2 border-purple-500 pb-3 text-center">Submit a Request</h2>
+            
+            <form id="supportForm" class="space-y-6">
+                <!-- User Information -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label for="fullName" class="block text-sm font-medium text-gray-700">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required
+                               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 transition duration-150">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                        <input type="email" id="email" name="email" required
+                               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 transition duration-150">
+                    </div>
+                    <div>
+                        <label for="phoneNumber" class="block text-sm font-medium text-gray-700">Phone Number (Optional)</label>
+                        <input type="tel" id="phoneNumber" name="phoneNumber"
+                               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 transition duration-150">
+                    </div>
+                </div>
+
+                <!-- Preferred Contact Dropdown -->
+                <div>
+                    <label for="contactPreference" class="block text-sm font-medium text-gray-700">What type of contact do you prefer?</label>
+                    <select id="contactPreference" name="contactPreference" required
+                            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 transition duration-150">
+                        <option value="">Select an option</option>
+                        <option value="Email">Email</option>
+                        <option value="Phone Call">Phone Call</option>
+                    </select>
+                </div>
+
+                <!-- Category and Subcategory Dropdowns -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+                        <select id="category" name="category" required
+                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 transition duration-150">
+                            <option value="">Select a Category</option>
+                        </select>
+                    </div>
+                    <!-- This div will be hidden until a category is selected -->
+                    <div id="subcategoryContainer" class="hidden">
+                        <label for="subcategory" class="block text-sm font-medium text-gray-700">Subcategory</label>
+                        <select id="subcategory" name="subcategory" required
+                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 transition duration-150">
+                            <option value="">Select a Subcategory</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Message Text Area -->
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-700">Your Message</label>
+                    <textarea id="message" name="message" rows="5" required
+                              class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-purple-500 focus:border-purple-500 transition duration-150"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div>
+                    <button type="submit"
+                            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-lg font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition duration-150">
+                        Submit Request
+                    </button>
+                </div>
+            </form>
+            
+            <!-- Confirmation Message Modal -->
+            <div id="confirmationMessage" class="hidden mt-6 p-4 rounded-lg text-white bg-green-500 shadow-md transition duration-300 ease-in-out">
+                Thank you for contacting us. Please wait at least 2-5 business days for a response.
+            </div>
+
+        </section>
+    </main>
+
+    <script>
+        // Updated data structure with the new, comprehensive list of categories and subcategories
+        const SUPPORT_DATA = [
+            {
+                category: "Booking Problems 📝",
+                subcategories: ["Trouble submitting booking form", "Didn’t receive booking confirmation", "Duplicate booking made", "Wrong date/time selected", "Last-minute booking issue"]
+            },
+            {
+                category: "Rescheduling & Cancellations ⏰",
+                subcategories: ["Need to reschedule a job", "How to cancel a booking", "Cancellation fees explained", "Last-minute cancellation request", "Rebooking after cancellation"]
+            },
+            {
+                category: "Payments 💳",
+                subcategories: ["Payment not going through", "Charged the wrong amount", "Refund request", "Double payment made", "Payment method not supported"]
+            },
+            {
+                category: "Pricing Questions 💲",
+                subcategories: ["General pricing information", "Discounts available", "Loyalty deals or packages", "Hourly vs flat rates", "Price mismatch on website"]
+            },
+            {
+                category: "Receipts & Invoices 🧾",
+                subcategories: ["Need a receipt copy", "Invoice correction request", "Didn’t receive my invoice", "Tax/GST questions", "Wrong name on receipt"]
+            },
+            {
+                category: "Communication 📞",
+                subcategories: ["Didn’t get a reply", "How long until response?", "Wrong contact details", "Prefer text updates", "Prefer email updates"]
+            },
+            {
+                category: "Availability 📅",
+                subcategories: ["No time slots available", "Fully booked for my date", "Requesting urgent booking", "Weekend/holiday availability", "How far ahead can I book?"]
+            },
+            {
+                category: "Location & Areas 🌍",
+                subcategories: ["Is my suburb covered?", "Jobs outside Albury/Lavington", "Extra travel charges", "Expanding service areas", "Clarify exact coverage map"]
+            },
+            {
+                category: "Service Information ℹ️",
+                subcategories: ["How jobs are scheduled", "Estimated job duration", "What to expect during a booking", "Job priority questions", "Clarifying rules and guidelines"]
+            },
+            {
+                category: "Privacy & Security 🔒",
+                subcategories: ["How is my data used?", "Security of online forms", "Data storage location", "Sharing info with third parties", "Deleting my data"]
+            },
+            {
+                category: "Support Response Times ⏳",
+                subcategories: ["How long do replies take?", "No response received yet", "Need urgent help", "Delayed email response", "Chat/message not answered"]
+            },
+            {
+                category: "Feedback & Suggestions 🗣️",
+                subcategories: ["Leave positive feedback", "Share improvement ideas", "Report a minor issue", "Suggestions for new features", "Rate my experience"]
+            },
+            {
+                category: "Complaints ⚠️",
+                subcategories: ["Report a bad experience", "Formal complaint submission", "Not satisfied with resolution", "Escalate complaint", "How complaints are handled"]
+            },
+            {
+                category: "Lost & Found 🔑",
+                subcategories: ["Lost item during booking", "Found item not mine", "How to return found item", "Missing belongings report", "Follow-up on lost item"]
+            },
+            {
+                category: "Safety Concerns 🚨",
+                subcategories: ["General safety question", "Emergency during booking", "Unsafe environment noticed", "Reporting unsafe behaviour", "Clarification of safety rules"]
+            },
+            {
+                category: "Special Requests ⭐",
+                subcategories: ["Custom one-off request", "Urgent exception needed", "Unusual time or date", "Special instructions", "Requests outside normal policy"]
+            },
+            {
+                category: "Documents & Policies 📋",
+                subcategories: ["Terms & conditions explained", "Refund policy details", "Privacy policy details", "Code of conduct", "Request a copy of policies"]
+            },
+            {
+                category: "Weather Impacts 🌦️",
+                subcategories: ["Job cancelled due to rain", "Hot weather changes", "Extreme cold issues", "Rescheduling after weather", "Policy for bad weather"]
+            },
+            {
+                category: "Delays & Timing ⏱️",
+                subcategories: ["Late arrival", "Didn’t show up", "Arrived too early", "Running overtime", "Need flexible timing"]
+            },
+            {
+                category: "Travel & Extra Fees 🚗",
+                subcategories: ["Extra travel fee confusion", "Out-of-area fee questions", "Unexpected extra charge", "Fee not explained before booking", "Requesting fee breakdown"]
+            },
+            {
+                category: "Multiple Bookings 📚",
+                subcategories: ["Two bookings at same time", "Overlapping jobs confusion", "Linking multiple bookings", "Cancelling one of several", "Updating group bookings"]
+            },
+            {
+                category: "System Errors 🖥️",
+                subcategories: ["Website not working", "Booking form won’t submit", "Error message when paying", "Page won’t load", "Form fields not saving"]
+            },
+            {
+                category: "Notification Issues 🔔",
+                subcategories: ["Didn’t get booking notification", "Got duplicate notifications", "Wrong info in notification", "Delayed notification", "Notifications in wrong format"]
+            },
+            {
+                category: "General Information ℹ️",
+                subcategories: ["How does Odd Jobs work?", "What’s the process step-by-step?", "FAQ request", "Where to find contact info", "Who runs Odd Jobs?"]
+            },
+            {
+                category: "Other Help 🤝",
+                subcategories: ["Not sure what to pick", "Catch-all question", "Need human assistance", "My issue isn’t listed", "Miscellaneous request"]
+            }
+        ];
+
+        const categorySelect = document.getElementById('category');
+        const subcategoryContainer = document.getElementById('subcategoryContainer');
+        const subcategorySelect = document.getElementById('subcategory');
+        const form = document.getElementById('supportForm');
+        const confirmationMessage = document.getElementById('confirmationMessage');
+
+        /**
+         * Populates the category dropdown with options from the SUPPORT_DATA array.
+         */
+        function populateCategories() {
+            SUPPORT_DATA.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.category;
+                option.textContent = item.category;
+                categorySelect.appendChild(option);
+            });
+        }
+
+        /**
+         * Populates the subcategory dropdown based on the selected category.
+         */
+        function populateSubcategories() {
+            const selectedCategory = categorySelect.value;
+            // Clear existing subcategory options
+            subcategorySelect.innerHTML = '<option value="">Select a Subcategory</option>';
+            
+            const selectedCategoryData = SUPPORT_DATA.find(item => item.category === selectedCategory);
+            
+            if (selectedCategoryData) {
+                // Show the subcategory container and populate the options
+                subcategoryContainer.classList.remove('hidden');
+                selectedCategoryData.subcategories.forEach(subcategory => {
+                    const option = document.createElement('option');
+                    option.value = subcategory;
+                    option.textContent = subcategory;
+                    subcategorySelect.appendChild(option);
+                });
+            } else {
+                // Hide the subcategory container if no category is selected
+                subcategoryContainer.classList.add('hidden');
+            }
+        }
+
+        /**
+         * Handles the form submission event.
+         * Prevents default form submission and shows a success message.
+         * @param {Event} event - The form submission event.
+         */
+        async function handleFormSubmission(event) {
+            event.preventDefault(); // Stop the form from submitting normally
+
+            const webhookUrl = 'https://discord.com/api/webhooks/1408062131097698335/NoBM8D3toamNa2zVE9-8ad6d01_Le8eGIsRMNtnBDi8HHt4leuFJr0fRXDmvAb1fGHhd';
+            const formData = new FormData(form);
+
+            const fullName = formData.get('fullName');
+            const email = formData.get('email');
+            const phoneNumber = formData.get('phoneNumber') || 'N/A'; // Use N/A if optional phone number is not provided
+            const contactPreference = formData.get('contactPreference');
+            const category = formData.get('category');
+            const subcategory = formData.get('subcategory');
+            const message = formData.get('message');
+
+            const payload = {
+                username: "Odd Jobs Support Form",
+                embeds: [{
+                    title: "New Support Request Submitted",
+                    description: `A new support request has been submitted through the website form.`,
+                    color: 3447003, // A nice blue color for the embed
+                    fields: [
+                        { name: "Full Name", value: fullName, inline: true },
+                        { name: "Email Address", value: email, inline: true },
+                        { name: "Phone Number", value: phoneNumber, inline: true },
+                        { name: "Contact Preference", value: contactPreference, inline: true },
+                        { name: "Category", value: category, inline: false },
+                        { name: "Subcategory", value: subcategory, inline: false },
+                        { name: "Message", value: message, inline: false }
+                    ],
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            try {
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload),
+                });
+
+                if (response.ok) {
+                    // Show success message and reset form
+                    confirmationMessage.classList.remove('hidden');
+                    confirmationMessage.classList.add('animate-fadeIn');
+
+                    setTimeout(() => {
+                        form.reset();
+                        confirmationMessage.classList.add('hidden');
+                        populateSubcategories();
+                    }, 5000); // Wait 5 seconds before resetting the form
+                } else {
+                    // Handle server errors
+                    console.error('Failed to send message to Discord webhook.', response.status, response.statusText);
+                    alert('There was an error submitting your request. Please try again.');
+                }
+            } catch (error) {
+                // Handle network errors
+                console.error('An error occurred during the fetch operation:', error);
+                alert('A network error occurred. Please check your connection and try again.');
+            }
+        }
+
+        // Event listeners
+        window.addEventListener('load', populateCategories);
+        categorySelect.addEventListener('change', populateSubcategories);
+        form.addEventListener('submit', handleFormSubmission);
     </script>
 </body>
 </html>
