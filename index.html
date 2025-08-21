@@ -1,375 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="google-site-verification" content="uTMnBleeBB3-KFEJLQ-xIaS5f9trHnpgICeDAivOZeg" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Reuben's Odd Jobs</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8; /* Light blue-gray background */
-            color: #334155; /* Dark slate text */
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding-top: 15vh; /* Adjust padding to make space for the dropdown */
+            font-family: sans-serif;
         }
-        .section-heading {
-            @apply text-4xl font-bold text-center mb-12 text-blue-800; /* Stronger blue for headings */
+        h2, h3, p {
+            color: #fff;
         }
-        .card {
-            @apply bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out;
+        nav, footer, input, button, form {
+            display: none;
         }
-        .nav-link {
-            @apply text-white hover:text-blue-200 px-4 py-2 rounded-lg transition-colors duration-200 ease-in-out;
+        .progress-container {
+            background-color: #333;
+            height: 30px;
+            width: 80%;
+            margin: 20px auto;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
         }
-        .btn-primary {
-            @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-all duration-300 ease-in-out transform hover:scale-105;
+        .progress-indicator {
+            background-color: #fff;
+            height: 100%;
+            width: 30%;
+            border-radius: 5px;
+            animation: progress 2s linear infinite;
+            position: absolute;
+            top: 0;
+            left: 0;
+            box-sizing: border-box;
         }
-        .input-field {
-            @apply w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500;
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #000;
+            font-size: 0.9rem;
+            font-weight: bold;
         }
-        /* Smooth scroll behavior */
-        html {
-            scroll-behavior: smooth;
+        @keyframes progress {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(300%); }
+        }
+        #google_translate_element {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        /* Style the Google Translate dropdown to be more visible */
+        .goog-te-combo {
+            color: #000; /* Text color */
+            background-color: #eee; /* Background color */
+            border: 1px solid #777; /* Border */
+            padding: 5px; /* Padding */
+            border-radius: 3px; /* Rounded corners */
+            font-size: 0.9rem; /* Adjust font size */
+        }
+        .goog-te-gadget-simple {
+            background-color: transparent !important;
+            border: none !important;
+            padding: 0px !important;
+            *border: 1px solid #ccc !important; /* IE6 and IE7 */
+            font-size: 10pt;
+            display: inline-block;
+            cursor: pointer;
+            zoom: 1;
+            *display: inline; /* IE */
+        }
+        .goog-te-gadget-icon {
+            display: none !important;
+        }
+        .goog-te-gadget-text {
+            color: #fff !important;
+        }
+        a.goog-te-button {
+            display: none !important;
+        }
+        a.goog-te-menu-link {
+            color: #000 !important;
+        }
+        div.goog-te-gadget {
+            color: #fff !important;
+        }
+        div.goog-te-gadget-icon {
+            background: url(//translate.google.com/images/flags.gif) no-repeat scroll 0 0 transparent !important;
         }
     </style>
 </head>
-<body class="antialiased">
-
-    <!-- Header -->
-    <header class="bg-blue-700 text-white py-6 shadow-lg">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-6">
-            <h1 class="text-5xl font-extrabold mb-4 md:mb-0">Reuben's Odd Jobs</h1>
-            <nav class="flex flex-wrap justify-center gap-4">
-                <a href="#services" class="nav-link">🛠️ Services</a>
-                <a href="#prices" class="nav-link">💸 Prices</a>
-                <a href="#book" class="nav-link">📋 Book</a>
-                <a href="#reviews" class="nav-link">🌟 Reviews</a>
-                <a href="#faq" class="nav-link">❓ FAQ</a>
-                <a href="#hours" class="nav-link">⏰ Hours</a>
-                <a href="#support" class="nav-link">🙏 Support</a>
-            </nav>
+<body>
+    <div id="google_translate_element"></div>
+    <main class="container">
+        <div class="grid">
+            <section>
+                <hgroup>
+                    <h2>Website Temporarily Unavailable 🛠️</h2>
+                    <h3>Reuben's Odd Jobs is currently undergoing an update. ⚙️</h3>
+                </hgroup>
+                <p>Please check back again soon. ⏳</p>
+                <div class="progress-container">
+                    <div class="progress-indicator">
+                        <span class="progress-text">1%</span>
+                    </div>
+                </div>
+                <p>In the meantime, you can contact us via phone at <a href="tel:0260408857">0260408857</a> 📞 or email at <a href="reubensoddjobsalbury@gmail.com">reubensoddjobsalbury@gmail.com</a>. 📧</p>
+            </section>
         </div>
-    </header>
+    </main>
 
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-24 text-center shadow-inner">
-        <div class="container mx-auto px-6">
-            <h2 class="text-6xl font-extrabold mb-6 leading-tight">Your Go-To for Everyday Tasks!</h2>
-            <p class="text-xl mb-10 max-w-3xl mx-auto">
-                Need a hand with those odd jobs around the house or office? Reuben is here to help with a smile and at a fair price!
-            </p>
-            <a href="#book" class="btn-primary">Book a Service Today!</a>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <h2 class="section-heading">🛠️ Our Services</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-                <!-- Technology Help -->
-                <div class="card">
-                    <h3 class="text-2xl font-semibold mb-3 text-blue-700">🖥️ Technology Help</h3>
-                    <p class="text-lg text-gray-700 mb-2"><strong>Price Range:</strong> $10–$20</p>
-                    <p class="text-gray-600">
-                        Examples: Troubleshooting, device setup, or providing basic tech support.
-                    </p>
-                    <p class="text-sm text-blue-600 mt-2 font-medium">Prices are negotiable!</p>
-                </div>
-
-                <!-- Cleaning -->
-                <div class="card">
-                    <h3 class="text-2xl font-semibold mb-3 text-blue-700">🧼 Cleaning</h3>
-                    <p class="text-lg text-gray-700 mb-2"><strong>Price Range:</strong> $15–$25</p>
-                    <p class="text-gray-600">
-                        Examples: Light cleaning tasks around the home.
-                    </p>
-                    <p class="text-sm text-blue-600 mt-2 font-medium">Prices are negotiable!</p>
-                </div>
-
-                <!-- Party Help -->
-                <div class="card">
-                    <h3 class="text-2xl font-semibold mb-3 text-blue-700">🎉 Party Help</h3>
-                    <p class="text-lg text-gray-700 mb-2"><strong>Price Range:</strong> $15–$25</p>
-                    <p class="text-gray-600">
-                        Examples: Assisting with party setup, hosting, or post-party cleanup.
-                    </p>
-                    <p class="text-sm text-blue-600 mt-2 font-medium">Prices are negotiable!</p>
-                </div>
-
-                <!-- Pet Sitting -->
-                <div class="card">
-                    <h3 class="text-2xl font-semibold mb-3 text-blue-700">🐾 Pet Sitting</h3>
-                    <p class="text-lg text-gray-700 mb-2"><strong>Price Range:</strong> $10–$20</p>
-                    <p class="text-gray-600">
-                        Examples: Caring for pets, including feeding and ensuring their well-being.
-                        <br><em class="text-sm text-red-500">(Special note for large or unfamiliar dogs for safety.)</em>
-                    </p>
-                    <p class="text-sm text-blue-600 mt-2 font-medium">Prices are negotiable!</p>
-                </div>
-
-                <!-- Errands -->
-                <div class="card">
-                    <h3 class="text-2xl font-semibold mb-3 text-blue-700">🏃 Errands</h3>
-                    <p class="text-lg text-gray-700 mb-2"><strong>Price Range:</strong> $10–$15</p>
-                    <p class="text-gray-600">
-                        Examples: Running errands such as shopping, deliveries, or small tasks.
-                    </p>
-                    <p class="text-sm text-blue-600 mt-2 font-medium">Prices are negotiable!</p>
-                </div>
-
-                <!-- Gardening -->
-                <div class="card">
-                    <h3 class="text-2xl font-semibold mb-3 text-blue-700">🌿 Gardening</h3>
-                    <p class="text-lg text-gray-700 mb-2"><strong>Price Range:</strong> $15–$25</p>
-                    <p class="text-gray-600">
-                        Examples: Watering plants, weeding, or other basic gardening tasks.
-                    </p>
-                    <p class="text-sm text-blue-600 mt-2 font-medium">Prices are negotiable!</p>
-                </div>
-
-                <!-- Senior Assistance -->
-                <div class="card">
-                    <h3 class="text-2xl font-semibold mb-3 text-blue-700">🧑‍⚕️ Senior Assistance</h3>
-                    <p class="text-lg text-gray-700 mb-2"><strong>Price Range:</strong> $10–$20</p>
-                    <p class="text-gray-600">
-                        Examples: Light help around the house or providing companionship.
-                    </p>
-                    <p class="text-sm text-blue-600 mt-2 font-medium">Prices are negotiable!</p>
-                </div>
-
-                <!-- House Sitting -->
-                <div class="card">
-                    <h3 class="text-2xl font-semibold mb-3 text-blue-700">🏡 House Sitting</h3>
-                    <p class="text-lg text-gray-700 mb-2"><strong>Price Range:</strong> $15–$25</p>
-                    <p class="text-gray-600">
-                        Examples: Caring for homes, including watering plants, collecting mail, or general house monitoring.
-                    </p>
-                    <p class="text-sm text-blue-600 mt-2 font-medium">Prices are negotiable!</p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Prices Section -->
-    <section id="prices" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="section-heading">💸 Our Prices</h2>
-            <div class="overflow-x-auto">
-                <table class="min-w-full bg-white rounded-xl shadow-lg">
-                    <thead>
-                        <tr class="bg-blue-100 text-blue-800 uppercase text-sm leading-normal">
-                            <th class="py-3 px-6 text-left rounded-tl-xl">Service</th>
-                            <th class="py-3 px-6 text-left rounded-tr-xl">Price Range</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-700 text-base font-light">
-                        <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="py-3 px-6 text-left whitespace-nowrap">🖥️ Technology Help</td>
-                            <td class="py-3 px-6 text-left">$10–$20</td>
-                        </tr>
-                        <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="py-3 px-6 text-left">🧼 Cleaning</td>
-                            <td class="py-3 px-6 text-left">$15–$25</td>
-                        </tr>
-                        <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="py-3 px-6 text-left">🎉 Party Help</td>
-                            <td class="py-3 px-6 text-left">$15–$25</td>
-                        </tr>
-                        <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="py-3 px-6 text-left">🐾 Pet Sitting</td>
-                            <td class="py-3 px-6 text-left">$10–$20</td>
-                        </tr>
-                        <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="py-3 px-6 text-left">🏃 Errands</td>
-                            <td class="py-3 px-6 text-left">$10–$15</td>
-                        </tr>
-                        <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="py-3 px-6 text-left">🌿 Gardening</td>
-                            <td class="py-3 px-6 text-left">$15–$25</td>
-                        </tr>
-                        <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="py-3 px-6 text-left">🧑‍⚕️ Senior Assistance</td>
-                            <td class="py-3 px-6 text-left">$10–$20</td>
-                        </tr>
-                        <tr class="hover:bg-gray-100">
-                            <td class="py-3 px-6 text-left rounded-bl-xl">🏡 House Sitting</td>
-                            <td class="py-3 px-6 text-left rounded-br-xl">$15–$25</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <p class="text-center text-gray-600 mt-8 text-sm">
-                *Prices are estimates and are negotiable based on the complexity and duration of the task.
-                Please contact us to discuss your specific needs and get a personalized quote.
-            </p>
-        </div>
-    </section>
-
-    <!-- Book Section -->
-    <section id="book" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <h2 class="section-heading">📋 Book a Service</h2>
-            <div class="max-w-2xl mx-auto card text-center">
-                <p class="text-lg text-gray-700 mb-6">
-                    Ready to get started? Booking a service with Reuben's Odd Jobs is easy!
-                    Simply reach out to us directly via phone or email to discuss your needs and schedule a time.
-                </p>
-                <p class="text-lg text-red-600 font-bold mb-4">
-                    Please answer the following questions correctly or we will not be able to serve you:
-                </p>
-                <ul class="list-disc list-inside text-left text-gray-700 mb-6 mx-auto max-w-md">
-                    <li>Are you requesting 🖥️ Technology Help?</li>
-                    <li>Are you requesting 🧼 Cleaning?</li>
-                    <li>Are you requesting 🎉 Party Help?</li>
-                    <li>Are you requesting 🐾 Pet Sitting?</li>
-                    <li>Are you requesting 🏃 Errands?</li>
-                    <li>Are you requesting 🌿 Gardening?</li>
-                    <li>Are you requesting 🧑‍⚕️ Senior Assistance?</li>
-                    <li>Are you requesting 🏡 House Sitting?</li>
-                    <li>📅 What is your preferred Availability Date and Time?</li>
-                    <li>📘 What is your Facebook Username (if contacting by email)?</li>
-                    <li>📍 Where are you located? (e.g., Lavington, Springdale Heights, Glenroy, North Albury, East Albury, South Albury, West Albury)</li>
-                    <li>🏠 Where do you live? (Please provide your full address for service)</li>
-                    <li>💰 What is your preferred Payment Type?</li>
-                    <li>💸 How much are you paying? (AUD)</li>
-                    <li>💬 Do you have any other questions for Reuben?</li>
-                </ul>
-                <div class="space-y-4 text-gray-600 text-base">
-                    <p><strong>Phone:</strong> <a href="tel:0260408857" class="text-blue-600 hover:underline">02 6040 8857</a></p>
-                    <p><strong>Email:</strong> <a href="mailto:reubenoddjobalbury@gmail.com" class="text-blue-600 hover:underline">reubenoddjobalbury@gmail.com</a></p>
-                </div>
-                <p class="text-sm text-gray-500 mt-6">
-                    We're here to help make your life easier. Contact us today to get a personalized quote and book your odd job!
-                    We look forward to hearing from you!
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Reviews Section -->
-    <section id="reviews" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="section-heading">🌟 Customer Reviews</h2>
-            <div class="max-w-3xl mx-auto card text-center">
-                <p class="text-lg text-gray-700 mb-4">
-                    Our customer reviews section is currently under maintenance.
-                </p>
-                <p class="text-gray-600">
-                    Please check back soon for updated testimonials from our happy clients!
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <h2 class="section-heading">❓ Frequently Asked Questions</h2>
-            <div class="max-w-3xl mx-auto space-y-6">
-                <!-- FAQ Item 1 -->
-                <div class="card">
-                    <h3 class="text-xl font-semibold mb-2 text-blue-700">What areas do you serve?</h3>
-                    <p class="text-gray-600">
-                        We primarily serve the local Lavington area and surrounding suburbs. Please contact us to confirm if we cover your specific location.
-                    </p>
-                </div>
-                <!-- FAQ Item 2 -->
-                <div class="card">
-                    <h3 class="text-xl font-semibold mb-2 text-blue-700">How do I get a precise quote?</h3>
-                    <p class="text-gray-600">
-                        The prices listed are ranges. For a precise quote, please contact us directly with details about your specific task. Remember, prices are negotiable!
-                    </p>
-                </div>
-                <!-- FAQ Item 3 -->
-                <div class="card">
-                    <h3 class="text-xl font-semibold mb-2 text-blue-700">Are you insured?</h3>
-                    <p class="text-gray-600">
-                        Yes, Reuben's Odd Jobs is fully insured for your peace of mind.
-                    </p>
-                </div>
-                <!-- FAQ Item 4 -->
-                <div class="card">
-                    <h3 class="text-xl font-semibold mb-2 text-blue-700">What are your payment options?</h3>
-                    <p class="text-gray-600">
-                        We accept cash, bank transfer, and major credit/debit cards (via a secure mobile payment system).
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Hours Section -->
-    <section id="hours" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="section-heading">⏰ Opening Hours</h2>
-            <div class="max-w-xl mx-auto card text-center">
-                <p class="text-lg text-gray-700 mb-4 font-semibold">During School Term:</p>
-                <ul class="list-none p-0 space-y-2 text-gray-600 text-base mb-6">
-                    <li><strong>Monday:</strong> 3:40 PM - 6:00 PM</li>
-                    <li><strong>Tuesday:</strong> Closed</li>
-                    <li><strong>Wednesday:</strong> Closed</li>
-                    <li><strong>Thursday:</strong> 3:40 PM - 6:00 PM</li>
-                    <li><strong>Friday:</strong> 3:40 PM - 6:00 PM</li>
-                    <li><strong>Saturday:</strong> 11:00 AM - 6:30 PM</li>
-                    <li><strong>Sunday:</strong> 11:30 AM - 6:30 PM</li>
-                </ul>
-
-                <p class="text-lg text-gray-700 mb-4 font-semibold">During School Holidays and Public Holidays:</p>
-                <ul class="list-none p-0 space-y-2 text-gray-600 text-base mb-6">
-                    <li><strong>Monday:</strong> 9:00 AM - 5:00 PM</li>
-                    <li><strong>Tuesday:</strong> Closed</li>
-                    <li><strong>Wednesday:</strong> 9:00 AM - 5:00 PM</li>
-                    <li><strong>Thursday:</strong> 9:00 AM - 5:00 PM</li>
-                    <li><strong>Friday:</strong> 9:00 AM - 5:00 PM</li>
-                    <li><strong>Saturday:</strong> 11:30 AM - 6:30 PM</li>
-                    <li><strong>Sunday:</strong> 11:30 AM - 6:30 PM</li>
-                </ul>
-
-                <p class="text-sm text-gray-500 mt-4">
-                    If you have any questions, feel free to email us at <a href="mailto:reubenoddjobalbury@gmail.com" class="text-blue-600 hover:underline">reubenoddjobalbury@gmail.com</a>.
-                </p>
-                <p class="text-sm text-red-500 mt-4 font-semibold">
-                    ⏰ After 6 PM: We do not go to people's houses after 6:00 PM. The hours after 6 PM are for contacting us only 📞. Please feel free to reach out for inquiries! 😊
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Support Section -->
-    <section id="support" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <h2 class="section-heading">🙏 Support & Contact</h2>
-            <div class="max-w-2xl mx-auto card text-center">
-                <p class="text-lg text-gray-700 mb-6">
-                    Have a question or need assistance? Don't hesitate to reach out!
-                </p>
-                <div class="space-y-4 text-gray-600 text-base">
-                    <p><strong>Email:</strong> <a href="mailto:reubenoddjobalbury@gmail.com" class="text-blue-600 hover:underline">reubenoddjobalbury@gmail.com</a></p>
-                    <p><strong>Phone:</strong> <a href="tel:0260408857" class="text-blue-600 hover:underline">02 6040 8857</a></p>
-                    <p><strong>Address:</strong> Serving Lavington, NSW and surrounding areas.</p>
-                </div>
-                <p class="text-sm text-gray-500 mt-6">
-                    We aim to respond to all inquiries within 24 hours.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-blue-800 text-white py-8 text-center shadow-inner">
-        <div class="container mx-auto px-6">
-            <p>&copy; 2025 Reuben's Odd Jobs. All rights reserved.</p>
-            <p class="text-sm mt-2">Designed with care by Reuben.</p>
-        </div>
-    </footer>
-
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE},
+                'google_translate_element'
+            );
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
-
-
