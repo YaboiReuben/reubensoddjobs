@@ -1,133 +1,597 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="uTMnBleeBB3-KFEJLQ-xIaS5f9trHnpgICeDAivOZeg" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reuben's Odd Jobs</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #000;
-            color: #fff;
-            text-align: center;
-            padding-top: 15vh; /* Adjust padding to make space for the dropdown */
-            font-family: sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray background */
+            color: #334155; /* Dark slate text */
         }
-        h2, h3, p {
-            color: #fff;
+        .section-heading {
+            @apply text-4xl font-bold text-center mb-12 text-blue-800; /* Stronger blue for headings */
         }
-        nav, footer, input, button, form {
-            display: none;
+        .card {
+            @apply bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out;
         }
-        .progress-container {
-            background-color: #333;
-            height: 30px;
-            width: 80%;
-            margin: 20px auto;
-            border-radius: 5px;
-            position: relative;
-            overflow: hidden;
+        .nav-link {
+            @apply text-white hover:text-blue-200 px-4 py-2 rounded-lg transition-colors duration-200 ease-in-out;
         }
-        .progress-indicator {
-            background-color: #fff;
-            height: 100%;
-            width: 30%;
-            border-radius: 5px;
-            animation: progress 2s linear infinite;
-            position: absolute;
-            top: 0;
-            left: 0;
-            box-sizing: border-box;
+        .btn-primary {
+            @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-all duration-300 ease-in-out transform hover:scale-105;
         }
-        .progress-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #000;
-            font-size: 0.9rem;
-            font-weight: bold;
+        .input-field {
+            @apply w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500;
         }
-        @keyframes progress {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(300%); }
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
         }
-        #google_translate_element {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-        /* Style the Google Translate dropdown to be more visible */
-        .goog-te-combo {
-            color: #000; /* Text color */
-            background-color: #eee; /* Background color */
-            border: 1px solid #777; /* Border */
-            padding: 5px; /* Padding */
-            border-radius: 3px; /* Rounded corners */
-            font-size: 0.9rem; /* Adjust font size */
-        }
-        .goog-te-gadget-simple {
-            background-color: transparent !important;
-            border: none !important;
-            padding: 0px !important;
-            *border: 1px solid #ccc !important; /* IE6 and IE7 */
-            font-size: 10pt;
+        /* Style for the star rating system */
+        .rating {
             display: inline-block;
+            direction: rtl; /* Stars from right to left */
+        }
+        .rating input {
+            display: none; /* Hide the radio buttons */
+        }
+        .rating label {
+            color: #ccc; /* Default gray stars */
+            font-size: 2rem;
+            padding: 0 5px;
             cursor: pointer;
-            zoom: 1;
-            *display: inline; /* IE */
+            transition: color 0.2s ease-in-out;
         }
-        .goog-te-gadget-icon {
-            display: none !important;
+        .rating label:hover,
+        .rating label:hover ~ label {
+            color: #ffc107; /* Yellow on hover */
         }
-        .goog-te-gadget-text {
-            color: #fff !important;
-        }
-        a.goog-te-button {
-            display: none !important;
-        }
-        a.goog-te-menu-link {
-            color: #000 !important;
-        }
-        div.goog-te-gadget {
-            color: #fff !important;
-        }
-        div.goog-te-gadget-icon {
-            background: url(//translate.google.com/images/flags.gif) no-repeat scroll 0 0 transparent !important;
+        .rating input:checked ~ label {
+            color: #ffc107; /* Yellow for selected stars */
         }
     </style>
 </head>
-<body>
-    <div id="google_translate_element"></div>
-    <main class="container">
-        <div class="grid">
-            <section>
-                <hgroup>
-                    <h2>Website Temporarily Unavailable 🛠️</h2>
-                    <h3>Reuben's Odd Jobs is currently undergoing an update. ⚙️</h3>
-                </hgroup>
-                <p>Please check back again soon. ⏳</p>
-                <div class="progress-container">
-                    <div class="progress-indicator">
-                        <span class="progress-text">99%</span>
-                    </div>
-                </div>
-                <p>In the meantime, you can contact us via phone at <a href="tel:0260408857">0260408857</a> 📞 or email at <a href="reubensoddjobsalbury@gmail.com">reubensoddjobsalbury@gmail.com</a>. 📧</p>
-            </section>
-        </div>
-    </main>
+<body class="antialiased">
 
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement(
-                {pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE},
-                'google_translate_element'
-            );
-        }
+    <!-- Header -->
+    <header class="bg-blue-700 text-white py-6 shadow-lg">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-6">
+            <h1 class="text-5xl font-extrabold mb-4 md:mb-0">Reuben's Odd Jobs</h1>
+            <nav class="flex flex-wrap justify-center gap-4">
+                <a href="#services" class="nav-link">🛠️ Services</a>
+                <a href="#prices" class="nav-link">💸 Prices</a>
+                <a href="#book" class="nav-link">📋 Book</a>
+                <a href="#reviews" class="nav-link">🌟 Reviews</a>
+                <a href="#faq" class="nav-link">❓ FAQ</a>
+                <a href="#hours" class="nav-link">⏰ Hours</a>
+                <a href="#support" class="nav-link">🙏 Support</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-24 text-center shadow-inner">
+        <div class="container mx-auto px-6">
+            <h2 class="text-6xl font-extrabold mb-6 leading-tight">Your Go-To for Everyday Tasks!</h2>
+            <p class="text-xl mb-10 max-w-3xl mx-auto">
+                Need a hand with those odd jobs around the house or office? Reuben is here to help with a smile and at a fair price!
+            </p>
+            <a href="#book" class="btn-primary">Book a Service Today!</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="section-heading">🛠️ Our Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Technology Help -->
+                <div class="card">
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-700">🖥️ Technology Help</h3>
+                    <p class="text-lg text-gray-700 mb-2"><strong>Price Range:</strong> $10–$20</p>
+                    <p class="text-gray-600">
+                        Examples: Troubleshooting, device setup, or providing basic tech support.
+                    </p>
+                    <p class="text-sm text-blue-600 mt-2 font-medium">Prices are negotiable!</p>
+                </div>
+
+                <!-- Cleaning -->
+                <div class="card">
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-700">🧼 Cleaning</h3>
+                    <p class="text-lg text-gray-700 mb-2"><strong>Price Range:</strong> $15–$25</p>
+                    <p class="text-gray-600">
+                        Examples: Light cleaning tasks around the home.
+                    </p>
+                    <p class="text-sm text-blue-600 mt-2 font-medium">Prices are negotiable!</p>
+                </div>
+
+                <!-- Party Help -->
+                <div class="card">
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-700">🎉 Party Help</h3>
+                    <p class="text-lg text-gray-700 mb-2"><strong>Price Range:</strong> $15–$25</p>
+                    <p class="text-gray-600">
+                        Examples: Assisting with party setup, hosting, or post-party cleanup.
+                    </p>
+                    <p class="text-sm text-blue-600 mt-2 font-medium">Prices are negotiable!</p>
+                </div>
+
+                <!-- Pet Sitting -->
+                <div class="card">
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-700">🐾 Pet Sitting</h3>
+                    <p class="text-lg text-gray-700 mb-2"><strong>Price Range:</strong> $10–$20</p>
+                    <p class="text-gray-600">
+                        Examples: Caring for pets, including feeding and ensuring their well-being.
+                        <br><em class="text-sm text-red-500">(Special note for large or unfamiliar dogs for safety.)</em>
+                    </p>
+                    <p class="text-sm text-blue-600 mt-2 font-medium">Prices are negotiable!</p>
+                </div>
+
+                <!-- Errands -->
+                <div class="card">
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-700">🏃 Errands</h3>
+                    <p class="text-lg text-gray-700 mb-2"><strong>Price Range:</strong> $10–$15</p>
+                    <p class="text-gray-600">
+                        Examples: Running errands such as shopping, deliveries, or small tasks.
+                    </p>
+                    <p class="text-sm text-blue-600 mt-2 font-medium">Prices are negotiable!</p>
+                </div>
+
+                <!-- Gardening -->
+                <div class="card">
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-700">🌿 Gardening</h3>
+                    <p class="text-lg text-gray-700 mb-2"><strong>Price Range:</strong> $15–$25</p>
+                    <p class="text-gray-600">
+                        Examples: Watering plants, weeding, or other basic gardening tasks.
+                    </p>
+                    <p class="text-sm text-blue-600 mt-2 font-medium">Prices are negotiable!</p>
+                </div>
+
+                <!-- Senior Assistance -->
+                <div class="card">
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-700">🧑‍⚕️ Senior Assistance</h3>
+                    <p class="text-lg text-gray-700 mb-2"><strong>Price Range:</strong> $10–$20</p>
+                    <p class="text-gray-600">
+                        Examples: Light help around the house or providing companionship.
+                    </p>
+                    <p class="text-sm text-blue-600 mt-2 font-medium">Prices are negotiable!</p>
+                </div>
+
+                <!-- House Sitting -->
+                <div class="card">
+                    <h3 class="text-2xl font-semibold mb-3 text-blue-700">🏡 House Sitting</h3>
+                    <p class="text-lg text-gray-700 mb-2"><strong>Price Range:</strong> $15–$25</p>
+                    <p class="text-gray-600">
+                        Examples: Caring for homes, including watering plants, collecting mail, or general house monitoring.
+                    </p>
+                    <p class="text-sm text-blue-600 mt-2 font-medium">Prices are negotiable!</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Prices Section -->
+    <section id="prices" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-heading">💸 Our Prices</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white rounded-xl shadow-lg">
+                    <thead>
+                        <tr class="bg-blue-100 text-blue-800 uppercase text-sm leading-normal">
+                            <th class="py-3 px-6 text-left rounded-tl-xl">Service</th>
+                            <th class="py-3 px-6 text-left rounded-tr-xl">Price Range</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700 text-base font-light">
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left whitespace-nowrap">🖥️ Technology Help</td>
+                            <td class="py-3 px-6 text-left">$10–$20</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left">🧼 Cleaning</td>
+                            <td class="py-3 px-6 text-left">$15–$25</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left">🎉 Party Help</td>
+                            <td class="py-3 px-6 text-left">$15–$25</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left">🐾 Pet Sitting</td>
+                            <td class="py-3 px-6 text-left">$10–$20</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left">🏃 Errands</td>
+                            <td class="py-3 px-6 text-left">$10–$15</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left">🌿 Gardening</td>
+                            <td class="py-3 px-6 text-left">$15–$25</td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left">🧑‍⚕️ Senior Assistance</td>
+                            <td class="py-3 px-6 text-left">$10–$20</td>
+                        </tr>
+                        <tr class="hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left rounded-bl-xl">🏡 House Sitting</td>
+                            <td class="py-3 px-6 text-left rounded-br-xl">$15–$25</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-center text-gray-600 mt-8 text-sm">
+                *Prices are estimates and are negotiable based on the complexity and duration of the task.
+                Please contact us to discuss your specific needs and get a personalized quote.
+            </p>
+        </div>
+    </section>
+
+    <!-- Book Section -->
+    <section id="book" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="section-heading">📋 Book a Service</h2>
+            <div class="max-w-2xl mx-auto card">
+                <p class="text-lg text-gray-700 mb-6 text-center">
+                    Please fill out the form below to request a service.
+                </p>
+                <form id="bookingForm" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-gray-700 font-medium mb-1">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="John Doe" required class="input-field">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-gray-700 font-medium mb-1">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required class="input-field">
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-gray-700 font-medium mb-1">Phone Number (Optional)</label>
+                        <input type="tel" id="phone" name="phone" placeholder="04xx xxx xxx" class="input-field">
+                    </div>
+                    <div>
+                        <label for="facebook-name" class="block text-gray-700 font-medium mb-1">Facebook Name</label>
+                        <input type="text" id="facebook-name" name="facebook-name" placeholder="Your Facebook Profile Name" required class="input-field">
+                    </div>
+                    <div>
+                        <label for="service" class="block text-gray-700 font-medium mb-1">Service Requested</label>
+                        <select id="service" name="service" required class="input-field">
+                            <option value="">-- Please select a service --</option>
+                            <option value="technology-help">🖥️ Technology Help</option>
+                            <option value="cleaning">🧼 Cleaning</option>
+                            <option value="party-help">🎉 Party Help</option>
+                            <option value="pet-sitting">🐾 Pet Sitting</option>
+                            <option value="errands">🏃 Errands</option>
+                            <option value="gardening">🌿 Gardening</option>
+                            <option value="senior-assistance">🧑‍⚕️ Senior Assistance</option>
+                            <option value="house-sitting">🏡 House Sitting</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="datetime" class="block text-gray-700 font-medium mb-1">Preferred Date & Time</label>
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <input type="date" id="date" name="date" required class="input-field">
+                            <input type="time" id="time" name="time" required class="input-field">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="location" class="block text-gray-700 font-medium mb-1">Your Location (e.g. Lavington, Glenroy)</label>
+                        <input type="text" id="location" name="location" placeholder="e.g. Lavington" required class="input-field">
+                    </div>
+                    <div>
+                        <label for="address" class="block text-gray-700 font-medium mb-1">Full Address for Service</label>
+                        <textarea id="address" name="address" rows="3" placeholder="123 Example Street, Lavington, NSW 2641" required class="input-field"></textarea>
+                    </div>
+                    <div>
+                        <label for="payment-type" class="block text-gray-700 font-medium mb-1">Preferred Payment Type</label>
+                        <select id="payment-type" name="payment-type" required class="input-field">
+                            <option value="">-- Select payment type --</option>
+                            <option value="cash">Cash</option>
+                            <option value="bank-transfer">Bank Transfer</option>
+                            <option value="card">Credit/Debit Card</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="budget" class="block text-gray-700 font-medium mb-1">Your Proposed Payment (AUD)</label>
+                        <input type="number" id="budget" name="budget" placeholder="e.g. 20" min="0" class="input-field">
+                    </div>
+                    <div>
+                        <label for="questions" class="block text-gray-700 font-medium mb-1">Additional Details/Questions</label>
+                        <textarea id="questions" name="questions" rows="4" placeholder="Please provide any other details about the job here..." class="input-field"></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn-primary w-full">Submit Booking Request</button>
+                    </div>
+                </form>
+                <div id="statusMessage" class="mt-4 text-center hidden"></div>
+                <div class="space-y-4 text-gray-600 text-base mt-8 text-center">
+                    <p><strong>Phone:</strong> <a href="tel:0260408857" class="text-blue-600 hover:underline">02 6040 8857</a></p>
+                    <p><strong>Email:</strong> <a href="mailto:reubenoddjobalbury@gmail.com" class="text-blue-600 hover:underline">reubenoddjobalbury@gmail.com</a></p>
+                </div>
+                <p class="text-sm text-gray-500 mt-6 text-center">
+                    We'll review your request and get back to you to confirm the details and schedule your service. We look forward to hearing from you!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-heading">🌟 Leave a Review</h2>
+            <div class="max-w-2xl mx-auto card">
+                <p class="text-lg text-gray-700 mb-6 text-center">
+                    We'd love to hear your feedback! Please take a moment to leave a review.
+                </p>
+                <form id="reviewForm" class="space-y-6">
+                    <div>
+                        <label for="reviewerName" class="block text-gray-700 font-medium mb-1">Your Name</label>
+                        <input type="text" id="reviewerName" name="reviewerName" placeholder="Your Name" required class="input-field">
+                    </div>
+                    <div>
+                        <label for="rating" class="block text-gray-700 font-medium mb-1">Your Rating</label>
+                        <div class="rating flex justify-center">
+                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 stars">★</label>
+                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 stars">★</label>
+                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 stars">★</label>
+                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 stars">★</label>
+                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star">★</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="reviewText" class="block text-gray-700 font-medium mb-1">Your Review</label>
+                        <textarea id="reviewText" name="reviewText" rows="4" placeholder="Tell us about your experience..." required class="input-field"></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn-primary w-full">Submit Review</button>
+                    </div>
+                </form>
+                <div id="reviewStatus" class="mt-4 text-center hidden"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="section-heading">❓ Frequently Asked Questions</h2>
+            <div class="max-w-3xl mx-auto space-y-6">
+                <!-- FAQ Item 1 -->
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-2 text-blue-700">What areas do you serve?</h3>
+                    <p class="text-gray-600">
+                        We primarily serve the local Lavington area and surrounding suburbs. Please contact us to confirm if we cover your specific location.
+                    </p>
+                </div>
+                <!-- FAQ Item 2 -->
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-2 text-blue-700">How do I get a precise quote?</h3>
+                    <p class="text-gray-600">
+                        The prices listed are ranges. For a precise quote, please contact us directly with details about your specific task. Remember, prices are negotiable!
+                    </p>
+                </div>
+                <!-- FAQ Item 3 -->
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-2 text-blue-700">Are you insured?</h3>
+                    <p class="text-gray-600">
+                        Yes, Reuben's Odd Jobs is fully insured for your peace of mind.
+                    </p>
+                </div>
+                <!-- FAQ Item 4 -->
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-2 text-blue-700">What are your payment options?</h3>
+                    <p class="text-gray-600">
+                        We accept cash, bank transfer, and major credit/debit cards (via a secure mobile payment system).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours Section -->
+    <section id="hours" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-heading">⏰ Opening Hours</h2>
+            <div class="max-w-xl mx-auto card text-center">
+                <p class="text-lg text-gray-700 mb-4 font-semibold">During School Term:</p>
+                <ul class="list-none p-0 space-y-2 text-gray-600 text-base mb-6">
+                    <li><strong>Monday:</strong> 3:30 PM - 8:00 PM</li>
+                    <li><strong>Tuesday:</strong> Closed</li>
+                    <li><strong>Wednesday:</strong> Closed</li>
+                    <li><strong>Thursday:</strong> 3:30 PM - 8:00 PM</li>
+                    <li><strong>Friday:</strong> 3:30 PM - 9:00 PM</li>
+                    <li><strong>Saturday:</strong> 8:00 AM - 9:00 PM</li>
+                    <li><strong>Sunday:</strong> 8:00 AM - 8:00 PM</li>
+                </ul>
+
+                <p class="text-lg text-gray-700 mb-4 font-semibold">During School Holidays and Public Holidays:</p>
+                <ul class="list-none p-0 space-y-2 text-gray-600 text-base mb-6">
+                    <li><strong>Monday:</strong> 8:00 AM - 9:00 PM</li>
+                    <li><strong>Tuesday:</strong> Closed</li>
+                    <li><strong>Wednesday:</strong> 8:00 AM - 9:00 PM</li>
+                    <li><strong>Thursday:</strong> 8:00 AM - 9:00 PM</li>
+                    <li><strong>Friday:</strong> 8:00 AM - 9:00 PM</li>
+                    <li><strong>Saturday:</strong> 7:00 AM - 9:00 PM</li>
+                    <li><strong>Sunday:</strong> 7:00 AM - 9:00 PM</li>
+                </ul>
+                <p class="text-sm text-gray-500 mt-4">
+                    🌙 Please note: after 6 PM, we do not do services; it is for inquiries only. 📞
+                </p>
+                <p class="text-sm text-gray-500 mt-4">
+                    If you have any questions, feel free to email us at <a href="mailto:reubenoddjobalbury@gmail.com" class="text-blue-600 hover:underline">reubenoddjobalbury@gmail.com</a>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section id="support" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="section-heading">Need Support?</h2>
+            <div class="max-w-2xl mx-auto card text-center">
+                <p class="text-lg text-gray-700 mb-6">
+                    Have a question or need assistance? Go to <a href="https://reubensoddjobsweb.pages.dev/contact" class="text-blue-600 hover:underline">our support page</a> for help.
+                </p>
+                <p class="text-sm text-gray-500 mt-6">
+                    We aim to respond to all inquiries within 2 - 5 business days.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-800 text-white py-8 text-center shadow-inner">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2025 Reuben's Odd Jobs. All rights reserved.</p>
+            <p class="text-sm mt-2">Designed with care by Reuben.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Discord Webhook -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const bookingForm = document.getElementById('bookingForm');
+            const bookingStatusMessage = document.getElementById('statusMessage');
+            const reviewForm = document.getElementById('reviewForm');
+            const reviewStatusMessage = document.getElementById('reviewStatus');
+
+            // Discord webhook URLs provided by the user.
+            const bookingWebhookUrl = "https://discord.com/api/webhooks/1408023702905425970/88KqQMclIsGgTwe6DDIIEA_YxEUgQ4ZLSbuSYBzVBtS-AqXniWT_9IJmkfnu58mfv2zB";
+            const reviewWebhookUrl = "https://discord.com/api/webhooks/1408027443784060938/EBjsuHH0usq5EkAlXAy-wEN2-wvv2ty9zoVHaLdreF-z9wwL8C1s7ruffj-sb8XAfFQ-";
+
+            // Function to send form data to Discord
+            async function sendToDiscord(formType, data) {
+                let payload = {};
+                let webhookUrl = '';
+
+                if (formType === 'booking') {
+                    webhookUrl = bookingWebhookUrl;
+                    const serviceNames = {
+                        "technology-help": "🖥️ Technology Help",
+                        "cleaning": "🧼 Cleaning",
+                        "party-help": "🎉 Party Help",
+                        "pet-sitting": "🐾 Pet Sitting",
+                        "errands": "🏃 Errands",
+                        "gardening": "🌿 Gardening",
+                        "senior-assistance": "🧑‍⚕️ Senior Assistance",
+                        "house-sitting": "🏡 House Sitting",
+                    };
+                    const serviceName = serviceNames[data.service] || data.service;
+
+                    payload = {
+                        embeds: [{
+                            title: "New Booking Request",
+                            description: "A new odd job booking has been submitted!",
+                            color: 3447003, // A nice blue color
+                            fields: [
+                                { name: "Full Name", value: data.name, inline: true },
+                                { name: "Email Address", value: data.email, inline: true },
+                                { name: "Phone Number", value: data.phone || "Not provided", inline: true },
+                                { name: "Facebook Name", value: data['facebook-name'], inline: true },
+                                { name: "Service Requested", value: serviceName, inline: false },
+                                { name: "Preferred Date & Time", value: `${data.date} at ${data.time}`, inline: true },
+                                { name: "Location", value: data.location, inline: true },
+                                { name: "Full Address", value: data.address, inline: false },
+                                { name: "Preferred Payment Type", value: data['payment-type'], inline: true },
+                                { name: "Proposed Payment", value: data.budget ? `$${data.budget}` : "Not provided", inline: true },
+                                { name: "Additional Details", value: data.questions || "None provided", inline: false }
+                            ],
+                            timestamp: new Date().toISOString(),
+                        }]
+                    };
+                } else if (formType === 'review') {
+                    webhookUrl = reviewWebhookUrl;
+                    payload = {
+                        embeds: [{
+                            title: "New Customer Review",
+                            description: `A new review has been submitted!`,
+                            color: 16776960, // Gold color
+                            fields: [
+                                { name: "Reviewer Name", value: data.reviewerName, inline: true },
+                                { name: "Star Rating", value: `⭐ ${data.rating} / 5`, inline: true },
+                                { name: "Review", value: data.reviewText, inline: false }
+                            ],
+                            timestamp: new Date().toISOString(),
+                        }]
+                    };
+                }
+                
+                if (webhookUrl.includes("YOUR_DISCORD_WEBHOOK_URL_HERE")) {
+                    console.error("Error: Discord webhook URL is not configured. Please replace the placeholder.");
+                    return { ok: false, message: "Error: Submission failed. Please contact us directly." };
+                }
+
+                try {
+                    const response = await fetch(webhookUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(payload),
+                    });
+
+                    if (response.ok) {
+                        return { ok: true, message: "Request sent successfully! Thank you for your feedback." };
+                    } else {
+                        return { ok: false, message: `Error sending request: ${response.status} ${response.statusText}` };
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    return { ok: false, message: "Error: Submission failed. Please check your internet connection and try again." };
+                }
+            }
+
+            // Booking Form Submission
+            bookingForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                bookingStatusMessage.textContent = "Sending booking request...";
+                bookingStatusMessage.classList.remove('hidden', 'text-green-600', 'text-red-600');
+                
+                const formData = new FormData(bookingForm);
+                const data = Object.fromEntries(formData.entries());
+                const result = await sendToDiscord('booking', data);
+
+                if (result.ok) {
+                    bookingStatusMessage.textContent = "Booking request sent successfully! We'll be in touch soon.";
+                    bookingStatusMessage.classList.remove('text-red-600');
+                    bookingStatusMessage.classList.add('text-green-600');
+                    bookingForm.reset();
+                } else {
+                    bookingStatusMessage.textContent = result.message;
+                    bookingStatusMessage.classList.remove('text-green-600');
+                    bookingStatusMessage.classList.add('text-red-600');
+                }
+            });
+
+            // Review Form Submission
+            reviewForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                reviewStatusMessage.textContent = "Sending review...";
+                reviewStatusMessage.classList.remove('hidden', 'text-green-600', 'text-red-600');
+
+                const formData = new FormData(reviewForm);
+                const data = Object.fromEntries(formData.entries());
+
+                const result = await sendToDiscord('review', data);
+
+                if (result.ok) {
+                    reviewStatusMessage.textContent = "Review sent successfully! Thank you for your feedback.";
+                    reviewStatusMessage.classList.remove('text-red-600');
+                    reviewStatusMessage.classList.add('text-green-600');
+                    reviewForm.reset();
+                } else {
+                    reviewStatusMessage.textContent = result.message;
+                    reviewStatusMessage.classList.remove('text-green-600');
+                    reviewStatusMessage.classList.add('text-red-600');
+                }
+            });
+        });
     </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>
-
-
-
