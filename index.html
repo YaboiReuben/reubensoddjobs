@@ -72,6 +72,7 @@
                 <a href="#faq" class="nav-link">❓ FAQ</a>
                 <a href="#hours" class="nav-link">⏰ Hours</a>
                 <a href="#support" class="nav-link">🙏 Support</a>
+                <a href="#join-us" class="nav-link">🤝 Join Our Team</a>
             </nav>
         </div>
     </header>
@@ -393,8 +394,24 @@
         </div>
     </section>
 
+    <!-- Join Our Team Section -->
+    <section id="join-us" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="section-heading">🤝 Join Our Team</h2>
+            <div class="max-w-2xl mx-auto card text-center">
+                <p class="text-lg text-gray-700 mb-6">
+                    Are you passionate about helping others and providing great service? We're always looking for dedicated individuals to join our team.
+                </p>
+                <a href="https://reubensoddjobs.pages.dev/careers" class="btn-primary">Learn More & Apply</a>
+                <p class="text-sm text-gray-500 mt-6">
+                    Join us in making a difference, one odd job at a time!
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- Hours Section -->
-    <section id="hours" class="py-20 bg-white">
+    <section id="hours" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
             <h2 class="section-heading">⏰ Opening Hours</h2>
             <div class="max-w-xl mx-auto card text-center">
@@ -520,7 +537,7 @@
                         }]
                     };
                 }
-                
+
                 if (webhookUrl.includes("YOUR_DISCORD_WEBHOOK_URL_HERE")) {
                     console.error("Error: Discord webhook URL is not configured. Please replace the placeholder.");
                     return { ok: false, message: "Error: Submission failed. Please contact us directly." };
@@ -551,7 +568,7 @@
                 e.preventDefault();
                 bookingStatusMessage.textContent = "Sending booking request...";
                 bookingStatusMessage.classList.remove('hidden', 'text-green-600', 'text-red-600');
-                
+
                 const formData = new FormData(bookingForm);
                 const data = Object.fromEntries(formData.entries());
                 const result = await sendToDiscord('booking', data);
