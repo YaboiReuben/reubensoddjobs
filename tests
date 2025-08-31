@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Only Site</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-gray-800 text-white p-6 shadow-lg">
+        <div class="container flex justify-between items-center">
+            <h1 class="text-3xl font-bold">Test Site</h1>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="py-12">
+        <div class="container bg-white p-8 rounded-xl shadow-lg">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Welcome to the Testing Ground!</h2>
+            <p class="text-gray-600 mb-6">
+                This is a simple, no-frills website designed specifically for your testing purposes. You can use this space to test scripts, styles, or any other web-based functionality.
+            </p>
+
+            <div id="test-area" class="border border-dashed border-gray-400 p-6 rounded-lg bg-gray-50">
+                <!-- This area is now empty for you to add your own code. -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white p-4 text-center mt-12">
+        <p class="text-sm">&copy; 2025 Test Site. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
