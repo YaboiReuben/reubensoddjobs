@@ -3,279 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Odd Job Application Form</title>
+    <title>Contact Us for Support</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8; /* Light blue-gray background */
-            color: #334155; /* Dark slate text */
+            background-color: #f7f7f7; /* Light gray background for the entire page */
         }
-        .section-heading {
-            @apply text-4xl font-bold text-center mb-12 text-blue-800; /* Stronger blue for headings */
+        .gradient-header {
+            background-image: linear-gradient(to right, #3B82F6, #9333EA);
         }
-        .card {
-            @apply bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out;
-        }
-        .btn-primary {
-            @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-all duration-300 ease-in-out transform hover:scale-105;
-        }
-        .input-field {
-            @apply w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500;
-        }
-        .checkbox-accent {
-            @apply h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500;
-        }
+        /* No need for .contact-box-link styling as buttons are now direct actions */
     </style>
 </head>
-<body class="antialiased">
+<body class="text-gray-800">
 
-    <!-- Join Us Section -->
-    <section id="join-us" class="py-20 bg-gray-50 min-h-screen flex items-center justify-center">
-        <div class="container mx-auto px-6">
-            <h2 class="section-heading">🤝 Join Our Team!</h2>
-            <div class="max-w-2xl mx-auto card">
-                <p class="text-lg text-gray-700 mb-6 text-center">
-                    Want to help your community and earn some extra income? Apply to join Reuben's Odd Jobs!
-                </p>
-                <form id="applicationForm" class="space-y-6">
-                    <div>
-                        <label for="fullName" class="block text-gray-700 font-medium mb-1">1. Full Name</label>
-                        <input type="text" id="fullName" name="fullName" placeholder="John Doe" required class="input-field">
-                    </div>
-                    <div>
-                        <label for="appEmail" class="block text-gray-700 font-medium mb-1">2. Email Address</label>
-                        <input type="email" id="appEmail" name="appEmail" placeholder="you@example.com" required class="input-field">
-                    </div>
-                    <div>
-                        <label for="appPhone" class="block text-gray-700 font-medium mb-1">3. Phone Number</label>
-                        <input type="tel" id="appPhone" name="appPhone" placeholder="04xx xxx xxx" class="input-field">
-                    </div>
-                    <div>
-                        <label for="appFacebookName" class="block text-gray-700 font-medium mb-1">4. Facebook Name</label>
-                        <input type="text" id="appFacebookName" name="appFacebookName" placeholder="Your Facebook Profile Name" required class="input-field">
-                    </div>
-                    <div>
-                        <label for="jobInterest" class="block text-gray-700 font-medium mb-1">5. What odd jobs are you most interested in performing?</label>
-                        <textarea id="jobInterest" name="jobInterest" rows="2" placeholder="e.g. Technology Help, Cleaning, Pet Sitting" class="input-field"></textarea>
-                    </div>
-                    <div>
-                        <label for="priorExperience" class="block text-gray-700 font-medium mb-1">6. Please list any prior experience you have with these types of tasks.</label>
-                        <textarea id="priorExperience" name="priorExperience" rows="4" placeholder="Please describe your experience here..." class="input-field"></textarea>
-                    </div>
-                    <div>
-                        <label for="termAvailability" class="block text-gray-700 font-medium mb-1">7. What is your availability during a typical school term week?</label>
-                        <textarea id="termAvailability" name="termAvailability" rows="3" placeholder="e.g. Mon: 3:30PM - 8:00PM, Tue: Closed" class="input-field"></textarea>
-                    </div>
-                    <div>
-                        <label for="holidayAvailability" class="block text-gray-700 font-medium mb-1">8. What is your availability during school and public holidays?</label>
-                        <textarea id="holidayAvailability" name="holidayAvailability" rows="3" placeholder="e.g. Mon-Fri: 8:00 AM - 9:00 PM" class="input-field"></textarea>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <label for="weekendAvailability" class="text-gray-700 font-medium">9. Are you available to work on weekends?</label>
-                        <input type="checkbox" id="weekendAvailability" name="weekendAvailability" class="checkbox-accent">
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <label for="afterHours" class="text-gray-700 font-medium">10. Are you able to provide services and answer inquiries after 6 PM?</label>
-                        <input type="checkbox" id="afterHours" name="afterHours" class="checkbox-accent">
-                    </div>
-                    <div>
-                        <label for="proposedPayment" class="block text-gray-700 font-medium mb-1">11. What is your proposed payment rate per hour, and is it negotiable?</label>
-                        <input type="text" id="proposedPayment" name="proposedPayment" placeholder="e.g. $20/hour, negotiable" class="input-field">
-                    </div>
-                    <div>
-                        <label for="unhappyClient" class="block text-gray-700 font-medium mb-1">12. How do you handle a situation where a client is unhappy with your service?</label>
-                        <textarea id="unhappyClient" name="unhappyClient" rows="4" class="input-field"></textarea>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-gray-700 font-medium mb-2">13. What days of the week are you available?</label>
-                        <div class="flex flex-wrap gap-4">
-                            <label class="flex items-center space-x-2">
-                                <input type="checkbox" name="availability[]" value="Monday" class="checkbox-accent">
-                                <span>Monday</span>
-                            </label>
-                            <label class="flex items-center space-x-2">
-                                <input type="checkbox" name="availability[]" value="Wednesday" class="checkbox-accent">
-                                <span>Wednesday</span>
-                            </label>
-                            <label class="flex items-center space-x-2">
-                                <input type="checkbox" name="availability[]" value="Thursday" class="checkbox-accent">
-                                <span>Thursday</span>
-                            </label>
-                            <label class="flex items-center space-x-2">
-                                <input type="checkbox" name="availability[]" value="Friday" class="checkbox-accent">
-                                <span>Friday</span>
-                            </label>
-                            <label class="flex items-center space-x-2">
-                                <input type="checkbox" name="availability[]" value="Saturday" class="checkbox-accent">
-                                <span>Saturday</span>
-                            </label>
-                            <label class="flex items-center space-x-2">
-                                <input type="checkbox" name="availability[]" value="Sunday" class="checkbox-accent">
-                                <span>Sunday</span>
-                            </label>
-                        </div>
-                    </div>
+    <!-- Header Section -->
+    <header class="gradient-header py-12 px-4 sm:px-6 lg:px-8 text-center rounded-b-xl shadow-lg">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight">Contact Us for Support</h1>
+        <p class="mt-4 text-xl sm:text-2xl text-white opacity-90">Reach out to us using the details below.</p>
+    </header>
 
-                    <div>
-                        <label for="confidentiality" class="block text-gray-700 font-medium mb-1">14. What is your process for handling confidential or sensitive information from clients?</label>
-                        <textarea id="confidentiality" name="confidentiality" rows="4" class="input-field"></textarea>
-                    </div>
-                    <div>
-                        <label for="safety" class="block text-gray-700 font-medium mb-1">15. How would you ensure the safety of both yourself and the client during a job?</label>
-                        <textarea id="safety" name="safety" rows="4" class="input-field"></textarea>
-                    </div>
-                    <div>
-                        <label for="transportation" class="block text-gray-700 font-medium mb-1">16. Do you have your own transportation, or do you rely on public transport?</label>
-                        <input type="text" id="transportation" name="transportation" class="input-field">
-                    </div>
-                    <div>
-                        <label for="paymentAccept" class="block text-gray-700 font-medium mb-1">17. What payment types are you able to accept?</label>
-                        <textarea id="paymentAccept" name="paymentAccept" rows="2" placeholder="e.g. Cash, Bank Transfer, Credit/Debit Card" class="input-field"></textarea>
-                    </div>
-                    <div>
-                        <label for="serviceLocation" class="block text-gray-700 font-medium mb-1">18. What is your service location?</label>
-                        <input type="text" id="serviceLocation" name="serviceLocation" placeholder="e.g. Lavington" class="input-field">
-                    </div>
-                    <div>
-                        <label for="travelWillingness" class="block text-gray-700 font-medium mb-1">19. Are you willing to travel to surrounding suburbs for a job?</label>
-                        <input type="text" id="travelWillingness" name="travelWillingness" class="input-field">
-                    </div>
-                    <div>
-                        <label for="references" class="block text-gray-700 font-medium mb-1">20. Do you have any references we can contact?</label>
-                        <textarea id="references" name="references" rows="3" class="input-field"></textarea>
-                    </div>
-                    <div>
-                        <label for="whyYou" class="block text-gray-700 font-medium mb-1">21. Why do you believe you are the right person to join Reuben's Odd Jobs?</label>
-                        <textarea id="whyYou" name="whyYou" rows="4" class="input-field"></textarea>
-                    </div>
-                    <div>
-                        <label for="unexpectedChallenges" class="block text-gray-700 font-medium mb-1">22. How do you handle unexpected challenges or issues that arise on the job?</label>
-                        <textarea id="unexpectedChallenges" name="unexpectedChallenges" rows="4" class="input-field"></textarea>
-                    </div>
-                    <div>
-                        <label for="motivation" class="block text-gray-700 font-medium mb-1">23. What motivates you to do a good job?</label>
-                        <textarea id="motivation" name="motivation" rows="4" class="input-field"></textarea>
-                    </div>
+    <!-- Main content area -->
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8 mt-8">
 
-                    <div>
-                        <button type="submit" class="btn-primary w-full">Submit Application</button>
-                    </div>
-                </form>
-                <div id="applicationStatus" class="mt-4 text-center hidden"></div>
+        <!-- Contact Information Section -->
+        <section class="bg-white p-6 sm:p-8 rounded-xl shadow-md mb-8 text-center">
+            <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6 border-b-2 border-purple-500 pb-3">Get in Touch</h2>
+            <p class="text-lg sm:text-xl text-gray-700 mb-8">We're here to help! Contact us directly via email or phone.</p>
+
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
+                <!-- Email Contact Box -->
+                <div class="bg-blue-50 p-6 rounded-lg shadow-inner flex flex-col items-center w-full sm:w-1/2 md:w-1/3">
+                    <span class="text-blue-600 text-4xl mb-3">📧</span>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Email Us</h3>
+                    <p class="text-blue-700 text-lg font-medium break-all mb-4" id="contactEmail">reubensoddjobalbury.help@gmail.com</p>
+                    <a href="mailto:reubensoddjobalbury.help@gmail.com" 
+                       class="px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-200 shadow">
+                        Email Now
+                    </a>
+                </div>
+
+                <!-- Phone Contact Box -->
+                <div class="bg-purple-50 p-6 rounded-lg shadow-inner flex flex-col items-center w-full sm:w-1/2 md:w-1/3">
+                    <span class="text-purple-600 text-4xl mb-3">📞</span>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Call Us</h3>
+                    <p class="text-purple-700 text-lg font-medium mb-4" id="contactPhone">0260408857</p>
+                    <a href="tel:+61260408857" 
+                       class="px-5 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition duration-200 shadow">
+                        Call Now
+                    </a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- JavaScript for Discord Webhook -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const applicationForm = document.getElementById('applicationForm');
-            const applicationStatusMessage = document.getElementById('applicationStatus');
+        // Define the contact details
+        const CONTACT_EMAIL = "reubensoddjobalbury.help@gmail.com";
+        const CONTACT_PHONE = "0260408857";
 
-            // Discord webhook URL for applications
-            const applicationWebhookUrl = "https://discord.com/api/webhooks/1411122799279341621/qgCs08JaSvLdvEbFCrFBZWrjRmhNQMSL2vQCTysH2oQC38zXizrL5Iy-OZ1jib1vuzfi";
-
-            // Function to send form data to Discord
-            async function sendToDiscord(data) {
-                // Get selected availability days
-                const selectedDays = Array.from(document.querySelectorAll('input[name="availability[]"]:checked'))
-                                          .map(checkbox => checkbox.value)
-                                          .join(', ');
-
-                const payload = {
-                    embeds: [{
-                        title: "New Job Application",
-                        description: `A new job application has been submitted!`,
-                        color: 5763719, // Green color
-                        fields: [
-                            { name: "1. Full Name", value: data.fullName, inline: true },
-                            { name: "2. Email", value: data.appEmail, inline: true },
-                            { name: "3. Phone Number", value: data.appPhone || "Not provided", inline: true },
-                            { name: "4. Facebook Name", value: data.appFacebookName, inline: true },
-                            { name: "5. Job Interest", value: data.jobInterest || "Not provided", inline: false },
-                            { name: "6. Prior Experience", value: data.priorExperience || "Not provided", inline: false },
-                            { name: "7. Term Availability", value: data.termAvailability || "Not provided", inline: false },
-                            { name: "8. Holiday Availability", value: data.holidayAvailability || "Not provided", inline: false },
-                            { name: "9. Weekend Availability", value: data.weekendAvailability ? 'Yes' : 'No', inline: true },
-                            { name: "10. After Hours", value: data.afterHours ? 'Yes' : 'No', inline: true },
-                            { name: "11. Proposed Payment", value: data.proposedPayment || "Not provided", inline: false },
-                            { name: "12. Unhappy Client", value: data.unhappyClient || "Not provided", inline: false },
-                            // Updated field for the daily availability question
-                            { name: "13. Available Days", value: selectedDays || "Not provided", inline: false },
-                            { name: "14. Confidentiality", value: data.confidentiality || "Not provided", inline: false },
-                            { name: "15. Safety", value: data.safety || "Not provided", inline: false },
-                            { name: "16. Transportation", value: data.transportation || "Not provided", inline: false },
-                            { name: "17. Payment Acceptance", value: data.paymentAccept || "Not provided", inline: false },
-                            { name: "18. Service Location", value: data.serviceLocation || "Not provided", inline: false },
-                            { name: "19. Travel Willingness", value: data.travelWillingness || "Not provided", inline: false },
-                            { name: "20. References", value: data.references || "Not provided", inline: false },
-                            { name: "21. Why Join Us?", value: data.whyYou || "Not provided", inline: false },
-                            // New fields for the updated questions
-                            { name: "22. Unexpected Challenges", value: data.unexpectedChallenges || "Not provided", inline: false },
-                            { name: "23. Motivation", value: data.motivation || "Not provided", inline: false }
-                        ],
-                        timestamp: new Date().toISOString(),
-                    }]
-                };
-                
-                if (applicationWebhookUrl.includes("your-application-webhook-token")) {
-                    console.error("Error: Discord webhook URL is not configured. Please replace the placeholder.");
-                    return { ok: false, message: "Error: Submission failed. Please contact us directly." };
-                }
-
-                try {
-                    const response = await fetch(applicationWebhookUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(payload),
-                    });
-
-                    if (response.ok) {
-                        return { ok: true, message: "Application sent successfully! We'll be in touch soon." };
-                    } else {
-                        return { ok: false, message: `Error sending application: ${response.status} ${response.statusText}` };
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                    return { ok: false, message: "Error: Submission failed. Please check your internet connection and try again." };
-                }
-            }
-
-            // Job Application Form Submission
-            applicationForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                applicationStatusMessage.textContent = "Sending application...";
-                applicationStatusMessage.classList.remove('hidden', 'text-green-600', 'text-red-600');
-
-                const formData = new FormData(applicationForm);
-                const data = Object.fromEntries(formData.entries());
-
-                // Manually add the checkbox values
-                data.weekendAvailability = applicationForm.querySelector('#weekendAvailability').checked;
-                data.afterHours = applicationForm.querySelector('#afterHours').checked;
-
-                const result = await sendToDiscord(data);
-
-                if (result.ok) {
-                    applicationStatusMessage.textContent = "Thank you! Please wait 2-3 days for a response.";
-                    applicationStatusMessage.classList.remove('text-red-600');
-                    applicationStatusMessage.classList.add('text-green-600');
-                    applicationForm.reset();
-                } else {
-                    applicationStatusMessage.textContent = result.message;
-                    applicationStatusMessage.classList.remove('text-green-600');
-                    applicationStatusMessage.classList.add('text-red-600');
-                }
-                applicationStatusMessage.classList.remove('hidden');
-            });
-        });
+        // Update the display with the contact details (optional, as they are hardcoded in HTML)
+        document.getElementById('contactEmail').textContent = CONTACT_EMAIL;
+        document.getElementById('contactPhone').textContent = CONTACT_PHONE;
     </script>
 </body>
 </html>
