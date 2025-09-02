@@ -16,6 +16,13 @@
         .gradient-header {
             background-image: linear-gradient(to right, #3B82F6, #9333EA);
         }
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -179,6 +186,10 @@
                 subcategories: ["Terms & conditions explained", "Refund policy details", "Privacy policy details", "Code of conduct", "Request a copy of policies"]
             },
             {
+                category: "Legal ⚖️",
+                subcategories: ["Dispute resolution", "Terms of service questions", "Copyright issues", "Reporting illegal activity", "Legal documentation requests"]
+            },
+            {
                 category: "Weather Impacts 🌦️",
                 subcategories: ["Job cancelled due to rain", "Hot weather changes", "Extreme cold issues", "Rescheduling after weather", "Policy for bad weather"]
             },
@@ -209,6 +220,18 @@
             {
                 category: "Other Help 🤝",
                 subcategories: ["Not sure what to pick", "Catch-all question", "Need human assistance", "My issue isn’t listed", "Miscellaneous request"]
+            },
+            {
+                category: "Technical Support 💻",
+                subcategories: ["Website not loading", "Login issues", "Error messages", "Form not working", "Mobile app problems"]
+            },
+            {
+                category: "Account Management 👤",
+                subcategories: ["Update contact details", "Change password", "Deactivate account", "Reset forgotten password", "Change email address"]
+            },
+            {
+                category: "Partnership Inquiries 🤝",
+                subcategories: ["Become an odd jobber", "Propose a business collaboration", "Media inquiries", "Advertise on your site", "Sponsorship opportunities"]
             }
         ];
 
@@ -315,13 +338,35 @@
                 } else {
                     // Handle server errors
                     console.error('Failed to send message to Discord webhook.', response.status, response.statusText);
-                    alert('There was an error submitting your request. Please try again.');
+                    // Use a custom message box instead of alert
+                    showCustomMessage('There was an error submitting your request. Please try again.');
                 }
             } catch (error) {
                 // Handle network errors
                 console.error('An error occurred during the fetch operation:', error);
-                alert('A network error occurred. Please check your connection and try again.');
+                // Use a custom message box instead of alert
+                showCustomMessage('A network error occurred. Please check your connection and try again.');
             }
+        }
+
+        /**
+         * Creates and displays a custom message box.
+         * @param {string} message - The message to display.
+         */
+        function showCustomMessage(message) {
+            let messageBox = document.getElementById('customMessageBox');
+            if (!messageBox) {
+                messageBox = document.createElement('div');
+                messageBox.id = 'customMessageBox';
+                messageBox.classList.add('fixed', 'inset-x-0', 'top-4', 'mx-auto', 'max-w-md', 'bg-red-500', 'text-white', 'p-4', 'rounded-lg', 'shadow-lg', 'text-center', 'z-50', 'animate-fadeIn');
+                document.body.appendChild(messageBox);
+            }
+            messageBox.textContent = message;
+            messageBox.classList.remove('hidden');
+
+            setTimeout(() => {
+                messageBox.classList.add('hidden');
+            }, 5000);
         }
 
         // Event listeners
